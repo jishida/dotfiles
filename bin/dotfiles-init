@@ -1,0 +1,29 @@
+#!/bin/sh
+
+eval "$(sh "$(cd "$(dirname "$0")"&&pwd)/../libexec/modulize.sh")"
+
+use binutil
+
+bin_init dotfiles-init
+
+VIM_INIT_ARGS='main sub dein'
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --without-dein)
+      VIM_INIT_ARGS='main sub'
+      ;;
+    *)
+      warn "unknown argument '$1'"
+      ;;
+  esac
+  shift 1
+done
+
+sh "$BIN_DIR/append-env" || fatal 'failed to apply environment'
+sh "$BIN_DIR/tmux-init" || fatal 'failed to initialize tmux'
+sh "$BIN_DIR/global-init" || fatal 'failed to initialize global'
+sh "$BIN_DIR/git-init" || fatal 'failed to initialize git'
+sh "$BIN_DIR/vim-init" $VIM_INIT_ARGS || fatal 'failed to initialize vim'
+
+bin_exit

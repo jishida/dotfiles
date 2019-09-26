@@ -1,0 +1,131 @@
+#!/bin/sh
+
+eval "$(sh "$(cd "$(dirname "$0")"&&pwd)/../libexec/modulize.sh")"
+
+use print
+use chars
+use binutil
+use debug
+use quote
+
+bin_init append-env
+
+BACKUP_DIR="$CACHE_DIR/$BIN_NAME/backup"
+BEGIN_LINE="# begin $BIN_NAME block"
+END_LINE="# end $BIN_NAME block"
+
+case "$(uname -s)" in
+  MSYS*|MINGW*)
+    PROFILE_SRC="$ROOT/msys/bash_profile.sh"
+    RC_SRC="$ROOT/msys/bashrc.sh"
+    ;;
+  *)
+    PROFILE_SRC="$ROOT/bash_profile.sh"
+    RC_SRC="$ROOT/bashrc.sh"
+    ;;
+esac
+
+PROFILE="$(cat -<<__BIN_APPEND_ENV_PROFILE__
+. $(quote "$PROFILE_SRC")
+__BIN_APPEND_ENV_PROFILE__
+)"
+
+RC="$(cat -<<__BIN_APPEND_ENV_RC__
+DOTFILES_HOME=$(quote "$ROOT")
+. $(quote "$RC_SRC")
+__BIN_APPEND_ENV_RC__
+)"
+
+debug_var BACKUP_DIR
+debug_var BEGIN_LINE
+debug_var END_LINE
+debug_var PROFILE_SRC
+debug_var RC_SRC
+debug_var PROFILE
+debug_var RC
+
+append() {
+  (
+    SCOPE="$(scope)"
+    scope $BIN_NAME append
+
+    TARGET="$1"
+    debug "TARGET: $TARGET"
+
+    BACKUP="$BACKUP_DIR/$(basename "$TARGET")"
+    SCRIPT="$(cat "$TARGET" || fatal "failed to load target script ('$TARGET')")"
+    print "$SCRIPT" > "$BACKUP" || error "failed to backup '$TARGET' -> '$BACKUP'"
+
+    PREFIX_NR="$(
+      print "$SCRIPT" | \
+        grep -e "^$BEGIN_LINE" -n | \
+        head -1 | \
+        sed -e 's/:.*//g'
+    )"
+    debug "PREFIX_NR: $PREFIX_NR"
+    if [ -z "$PREFIX_NR" ]; then
+      PREFIX="$(print "$SCRIPT")"
+      SUFFIX=''
+    else
+      PREFIX="$(
+        print "$SCRIPT" | \
+          head -$(expr $PREFIX_NR - 1) || \
+          fatal 'failed to extract PREFIX'
+      )"
+      SUFFIX_NR="$(
+        print "$SCRIPT" | \
+          grep -e "^$END_LINE" -n | \
+          tail -1 | \
+          sed -e 's/:.*//g'
+      )"
+      debug "SUFFIX_NR: $SUFFIX_NR"
+      if [ -z "$SUFFIX_NR" ]; then
+        SUFFIX=''
+      else
+        SUFFIX="$(
+          print "$SCRIPT" | \
+            tail -n +$(expr $SUFFIX_NR + 1) || \
+            fatal 'failed to extract SUFFIX'
+        )"
+      fi
+    fi
+
+    if [ -n "$(print "$PREFIX" | tail -1)" ]; then
+      PREFIX="$PREFIX$LF$LF"
+    fi
+
+    BLOCK="$(
+      print "$PREFIX"
+      printf '%s\n' "$BEGIN_LINE"
+      printf '\n%s\n' "$2"
+      printf '\n%s\n' "$END_LINE"
+      print "$SUFFIX"
+    )$LF$LF"
+    debug "BLOCK:"
+    debug "$BLOCK"
+
+    printf %s "$BLOCK" > "$TARGET" || fatal "failed to write target file ('$TARGET')"
+    scope "$SCOPE"
+  )
+}
+
+if [ ! -d "$BACKUP_DIR" ]; then
+  mkdir -p "$BACKUP_DIR" || error "failed to create backup directory ('$BACKUP_DIR')"
+fi
+
+if [ -f "$HOME/.bash_profile" ]; then
+  info "append environment to '$HOME/.bash_profile'"
+  append "$HOME/.bash_profile" "$PROFILE"
+else
+  if [ -f "$HOME/.profile" ]; then
+    info "append environment to '$HOME/.profile'"
+    append "$HOME/.profile" "$PROFILE"
+  fi
+fi
+
+if [ -f "$HOME/.bashrc" ]; then
+  info "append environment to '$HOME/.bashrc'"
+  append "$HOME/.bashrc" "$RC"
+fi
+
+bin_exit

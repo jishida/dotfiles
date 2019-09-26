@@ -1,0 +1,19 @@
+#!/bin/sh
+
+eval "$(sh "$(cd "$(dirname "$0")"&&pwd)/../libexec/modulize.sh")"
+
+use binutil
+use debug
+use mklinkf
+
+bin_init global-init
+
+GTAGS_CONF_SRC="$ROOT/gtags.conf"
+GTAGS_CONF="$HOME/.globalrc"
+
+debug_var GTAGS_CONF_SRC
+debug_var GTAGS_CONF 4
+
+mklinkf "$GTAGS_CONF_SRC" "$GTAGS_CONF"
+
+bin_exit

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+eval "$(sh "$(cd "$(dirname "$0")"&&pwd)/../libexec/modulize.sh")"
+
+use binutil
+use debug
+use mklinkf
+
+bin_init tmux-init
+
+TMUX_CONF_SRC="$ROOT/tmux.conf"
+TMUX_CONF="$HOME/.tmux.conf"
+
+debug_var TMUX_CONF_SRC
+debug_var TMUX_CONF 4
+
+mklinkf "$TMUX_CONF_SRC" "$TMUX_CONF"
+
+bin_exit

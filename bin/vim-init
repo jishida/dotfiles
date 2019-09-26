@@ -1,0 +1,99 @@
+#!/bin/sh
+
+eval "$(sh "$(cd "$(dirname "$0")"&&pwd)/../libexec/modulize.sh")"
+
+use binutil
+use debug
+use check
+use mkdirall
+use rmall
+use mklinkf
+
+bin_init vim-init
+
+MAIN=0
+SUB=0
+DEIN=0
+
+VIM_CONF="$HOME/.vimrc"
+NVIM_CONF="$XDG_CONFIG_HOME/nvim/init.vim"
+
+MAIN_DIR_SRC="$ROOT/vim"
+MAIN_CONF_SRC="$ROOT/init-main.vim"
+SUB_CONF_SRC="$ROOT/init-sub.vim"
+MAIN_DIR="$XDG_CONFIG_HOME/vim"
+MAIN_CONF="$NVIM_CONF"
+SUB_CONF="$VIM_CONF"
+DEIN_INSTALLER="$LIBEXEC_DIR/dein/installer.sh"
+DEIN_DIR="$HOME/.cache/dein"
+
+case "$(uname -s)" in
+  MSYS*|MINGW*)
+    MAIN_CONF_SRC="$ROOT/msys/init-main.vim"
+    ;;
+esac
+
+if [ $# -eq 0 ]; then
+  MAIN=1
+  SUB=1
+  DEIN=1
+fi
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    main) MAIN=1;;
+    sub) SUB=1;;
+    dein) DEIN=1;;
+    *)
+      warn "unknown argument '$1'"
+      ;;
+  esac
+  shift 1
+done
+
+debug_var MAIN 10
+debug_var SUB 11
+debug_var DEIN 10
+debug_var MAIN_DIR_SRC 2
+debug_var MAIN_CONF_SRC 1
+debug_var SUB_CONF_SRC 2
+debug_var MAIN_DIR 7
+debug_var MAIN_CONF 5
+debug_var SUB_CONF 6
+debug_var DEIN_INSTALLER
+debug_var DEIN_DIR 6
+
+# check npm || fatal "'npm' command must be installed"
+# check tsc || fatal "'tsc' command must be installed"
+# check neovim-node-host || fatal "'neovim-node-host' command must be installed"
+check rg || warn "'rg' command not found"
+
+if [ $DEIN -eq 1 ]; then
+  info "$BIN_NAME; dein"
+  rmall "$DEIN_DIR"
+
+  info 'installing dein'
+  OUTPUT="$(sh "$DEIN_INSTALLER" "$DEIN_DIR" 2>&1)"
+  RC=$?
+  test -n "$OUTPUT" && debug "$OUTPUT"
+  test "$RC" -ne 0 && fatal 'failed to install dein'
+fi
+
+if [ $MAIN -eq 1 ]; then
+  info "$BIN_NAME; main"
+
+  if [ -d "$MAIN_DIR" ]; then
+    rmall "$MAIN_DIR"
+  fi
+
+  mklinkf "$MAIN_DIR_SRC" "$MAIN_DIR"
+  mklinkf "$MAIN_CONF_SRC" "$MAIN_CONF"
+fi
+
+if [ $SUB -eq 1 ]; then
+  info "$BIN_NAME; sub"
+
+  mklinkf "$SUB_CONF_SRC" "$SUB_CONF"
+fi
+
+bin_exit

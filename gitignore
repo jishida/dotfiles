@@ -1,0 +1,26 @@
+.rgignore
+.vim/
+
+# vim
+*.swp
+
+# Intellij idea
+.idea/
+*.iml
+
+# vscode
+.vscode/
+
+# ctags
+tags
+
+# global
+GPATH
+GTAGS
+GRTAGS
+
+# direnv
+.envrc
+
+# ccls
+.ccls-cache/

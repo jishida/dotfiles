@@ -1,0 +1,54 @@
+[ftplugin]
+
+denite = """
+nnoremap <silent><buffer><expr> o denite#do_map('quit')
+nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+nnoremap <silent><buffer><expr> q denite#do_map('quit')
+nnoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+nnoremap <silent><buffer><expr> <C-Space> denite#do_map('quit')
+nnoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
+nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+"""
+
+denite-filer = """
+imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+imap <silent><buffer> <C-Space> <Plug>(denite_filter_quit)
+imap <silent><buffer> <C-c> <Plug>(denite_filter_quit)
+"""
+
+defx = """
+nnoremap <silent><buffer><expr> <CR> defx#async_action('drop')
+nnoremap <silent><buffer><expr> <C-c> defx#async_action('copy')
+nnoremap <silent><buffer><expr> <C-x> defx#do_action('move')
+nnoremap <silent><buffer><expr> <C-v> defx#do_action('paste')
+nnoremap <silent><buffer><expr> ! defx#do_action('execute_command')
+nnoremap <silent><buffer><expr> l defx#async_action('open_or_close_tree')
+nnoremap <silent><buffer><expr> h defx#async_action('cd', ['..'])
+nnoremap <silent><buffer><expr> ~ defx#async_action('cd')
+nnoremap <silent><buffer><expr> \ defx#async_action('cd', getcwd())
+nnoremap <silent><buffer><expr> ? defx#async_action('cd', [$HOME . '/.config/vim'])
+nnoremap <silent><buffer><expr> p defx#do_action('open', 'pedit')
+nnoremap <silent><buffer><expr> v defx#do_action('open', 'vsplit')
+nnoremap <silent><buffer><expr> o defx#async_action('open_tree_recursive')
+nnoremap <silent><buffer><expr> d defx#do_action('new_directory')
+nnoremap <silent><buffer><expr> f defx#do_action('new_file')
+nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'mark:filename:type:size:time')
+nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'Time')
+nnoremap <silent><buffer><expr> <Del> defx#do_action('remove_trash')
+nnoremap <silent><buffer><expr> D defx#do_action('remove_trash')
+nnoremap <silent><buffer><expr> r defx#do_action('rename')
+nnoremap <silent><buffer><expr> q defx#do_action('quit')
+nnoremap <silent><buffer><expr> <C-Space> defx#do_action('toggle_select')
+nnoremap <silent><buffer><expr> <C-a> defx#do_action('toggle_select_all')
+nnoremap <silent><buffer><expr> <F5> defx#do_action('redraw')
+xnoremap <silent><buffer><expr> <CR> defx#do_action('toggle_select_visual')
+nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
+nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd').':<C-u>pwd<CR>'
+nnoremap <silent><buffer><expr> i defx#do_action('toggle_ignored_files')
+nnoremap <silent><buffer> w :<C-u>SwitchDefaultDefx 1<CR>
+nnoremap <silent><buffer> W :<C-u>SwitchDefaultDefx -1<CR>
+"""

@@ -1,0 +1,42 @@
+#!/bin/sh
+
+abort() {
+  echo "$@" >&2
+  exit 1
+}
+
+ROOT_DIR="$(cd "$(dirname "$0")/.."&&pwd)"
+CACHE_DIR="$ROOT_DIR/.cache"
+GIT_CACHE_DIR="$CACHE_DIR/git"
+
+MANPAGES=git-manpages
+REPOSITORY='git://git.kernel.org/pub/scm/git/git-manpages.git'
+REPO_DIR="$GIT_CACHE_DIR/$MANPAGES"
+FETCH=0
+
+mkdir -p "$GIT_CACHE_DIR" >/dev/null 2>&1
+
+if [ -d "$REPO_DIR" ]; then
+  cd "$REPO_DIR"
+  git status >/dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    FETCH=1
+  fi
+fi
+
+if [ $FETCH -eq 0 ]; then
+  cd "$GIT_CACHE_DIR"
+  rm -rf "$REPO_DIR" || abort "failed to remove $REPO_DIR"
+  git clone "$REPOSITORY" || abort "failed to clone $REPOSITORY"
+  cd "$REPO_DIR"
+else
+  cd "$REPO_DIR"
+  git fetch || abort "failed to fetch"
+  git reset --hard origin/master || abort "failed to reset"
+fi
+
+cp -r "$REPO_DIR/man1" /usr/local/share/man || abort 'failed to copy man1'
+cp -r "$REPO_DIR/man5" /usr/local/share/man || abort 'failed to copy man5'
+cp -r "$REPO_DIR/man7" /usr/local/share/man || abort 'failed to copy man7'
+
+echo 'fetch-git-man complete successfully'

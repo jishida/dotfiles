@@ -1,0 +1,26 @@
+[[plugins]]
+repo = "roxma/nvim-yarp"
+
+[[plugins]]
+repo = "roxma/vim-hug-neovim-rpc"
+
+[[plugins]]
+repo = "Shougo/denite.nvim"
+depends = ["nvim-yarp", "vim-hug-neovim-rpc"]
+on_cmd = "Denite"
+hook_source = """
+source ~/.config/vim/plugins/denite.vim
+"""
+
+[[plugins]]
+repo = "Shougo/deoplete.nvim"
+depends = [
+  "nvim-yarp",
+  "vim-hug-neovim-rpc",
+  "context_filetype.vim"
+]
+on_event = "InsertEnter"
+hook_source = """
+source ~/.config/vim/plugins/deoplete.vim
+call deoplete#enable()
+"""

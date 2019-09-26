@@ -1,0 +1,140 @@
+[[plugins]]
+repo = "Shougo/dein.vim"
+hook_add = """
+let g:dein#auto_recache = 1
+"""
+
+[[plugins]]
+repo = "w0ng/vim-hybrid"
+
+[[plugins]]
+repo = "itchyny/lightline.vim"
+hook_add = """
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'winnr', 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified', 'helloworld' ] ]
+      \ },
+      \ 'inactive': {
+      \   'left': [ [ 'winnr' ],
+      \             [ 'filename' ] ]
+      \ },
+      \ }
+"""
+
+[[plugins]]
+repo = "vim-jp/vimdoc-ja"
+
+[[plugins]]
+repo = "rcmdnk/vim-markdown"
+
+[[plugins]]
+repo = "osyo-manga/vim-precious"
+depends = ["context_filetype.vim"]
+
+[[plugins]]
+repo = "Shougo/context_filetype.vim"
+
+[[plugins]]
+repo = "cespare/vim-toml"
+on_ft = "toml"
+
+# [[plugins]]
+# repo = "nixprime/cpsm"
+# build = "sh -c 'PY3=ON ./install.sh'"
+
+[[plugins]]
+repo = "raghur/fruzzy"
+on_source = ["denite.nvim"]
+hook_source = "let g:fruzzy#sortonempty = 0"
+hook_post_update = """
+call dein#source(['fruzzy'])
+call fruzzy#install()
+"""
+
+[[plugins]]
+repo = "HerringtonDarkholme/yats.vim"
+
+# [[plugins]]
+# repo = "mhartington/nvim-typescript"
+# build = "./install.sh"
+# depends = "deoplete.nvim"
+# on_ft = ["typescript", "typescript.tsx"]
+
+[[plugins]]
+repo = "junegunn/fzf"
+build = "./install --bin"
+merged = 0
+lazy = 1
+
+[[plugins]]
+repo = "junegunn/fzf.vim"
+depends = "fzf"
+on_cmd = "FZF"
+
+[[plugins]]
+repo = "Shougo/defx.nvim"
+on_cmd = "Defx"
+
+[[plugins]]
+repo = "xolox/vim-session"
+depends = ["xolox/vim-misc"]
+hook_add = """
+let s:directory = getcwd() . '/.vim/sessions'
+if isdirectory(s:directory)
+  let g:session_directory = s:directory
+  let g:session_autosave = 'yes'
+  let g:session_autoload = 'yes'
+  let g:session_autosave_periodic = 5
+else
+  let g:session_directory = '~/.config/vim/sessions'
+  let g:session_autosave = 'no'
+  let g:session_autoload = 'no'
+endif
+unlet s:directory
+"""
+
+[[plugins]]
+repo = "xolox/vim-misc"
+
+[[plugins]]
+repo = "dense-analysis/ale"
+
+[[plugins]]
+repo = "pangloss/vim-javascript"
+
+[[plugins]]
+repo = "mxw/vim-jsx"
+depends = "vim-javascript"
+hook_add = """
+let g:jsx_ext_required = 1
+"""
+
+[[plugins]]
+repo = "lighttiger2505/gtags.vim"
+hook_add = """
+let g:Gtags_Auto_Map = 1
+"""
+
+[[plugins]]
+repo = "ozelentok/denite-gtags"
+on_source = ["denite.nvim"]
+
+[[plugins]]
+repo = "airblade/vim-gitgutter"
+hook_add = """
+let g:gitgutter_highlight_linenrs = 1
+"""
+
+[[plugins]]
+repo = "tpope/vim-fugitive"
+
+[[plugins]]
+repo = "tpope/vim-dispatch"
+
+[[plugins]]
+repo = "janko/vim-test"
+depends = "vim-dispatch"
+hook_add = """
+let g:test#strategy = 'dispatch'
+"""

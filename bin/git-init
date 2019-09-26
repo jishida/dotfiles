@@ -1,0 +1,34 @@
+#!/bin/sh
+
+eval "$(sh "$(cd "$(dirname "$0")"&&pwd)/../libexec/modulize.sh")"
+
+use binutil
+use debug
+use check
+use mklinkf
+
+bin_init git-init
+
+GITCONFIG_SRC="$ROOT/gitconfig"
+GITIGNORE_SRC="$ROOT/gitignore"
+TIGCONFIG_SRC="$ROOT/tig.conf"
+
+GITCONFIG="$HOME/.gitconfig"
+GITIGNORE="$HOME/.gitignore_global"
+TIGCONFIG="$HOME/.tigrc"
+
+debug_var GITCONFIG_SRC
+debug_var GITIGNORE_SRC
+debug_var TIGCONFIG_SRC
+debug_var GITCONFIG 4
+debug_var GITIGNORE 4
+debug_var TIGCONFIG 4
+
+check git || warn "'git' command not found"
+check tig || warn "'tig' command not found"
+
+mklinkf "$GITIGNORE_SRC" "$GITIGNORE"
+mklinkf "$GITCONFIG_SRC" "$GITCONFIG"
+mklinkf "$TIGCONFIG_SRC" "$TIGCONFIG"
+
+bin_exit
