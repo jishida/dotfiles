@@ -37,3 +37,17 @@ command -v ll >/dev/null 2>&1 || alias ll='ls -la'
 alias gtags-ctags='gtags --gtagslabel=ctags'
 alias gtags-new-ctags='gtags --gtagslabel=new-ctags'
 alias gtags-pygments='gtags --gtagslabel=pygments'
+
+# nvim alias
+e() {
+  if [ -d "$1" ]; then
+    cd "$1"
+    nvim
+    return
+  fi
+  if [ -f "$1" ]; then
+    cd "$(dirname "$1")"
+    set -- "$(basename "$1")"
+  fi
+  nvim "$1"
+}
