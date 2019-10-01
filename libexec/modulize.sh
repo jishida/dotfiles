@@ -23,11 +23,11 @@ LOG_ERROR=3
 LOG_FATAL=4
 
 case "$LOG_LEVEL" in
-  [Dd][Ee][Bb][Uu][Gg]) LOG_LEVEL=$LOG_DEBUG;;
-  [Ii][Nn][Ff][Oo]|'') LOG_LEVEL=$LOG_INFO;;
-  [Ww][Aa][Rr][Nn]) LOG_LEVEL=$LOG_WARN;;
-  [Ee][Rr][Rr][Oo][Rr]) LOG_LEVEL=$LOG_ERROR;;
-  [Ff][Aa][Tt][Aa][Ll]) LOG_LEVEL=$LOG_FATAL;;
+  [Dd][Ee][Bb][Uu][Gg]) LOG_LEVEL=$LOG_DEBUG ;;
+  [Ww][Aa][Rr][Nn])     LOG_LEVEL=$LOG_WARN  ;;
+  [Ee][Rr][Rr][Oo][Rr]) LOG_LEVEL=$LOG_ERROR ;;
+  [Ff][Aa][Tt][Aa][Ll]) LOG_LEVEL=$LOG_FATAL ;;
+  *)                    LOG_LEVEL=$LOG_INFO  ;;
 esac
 
 log() {
