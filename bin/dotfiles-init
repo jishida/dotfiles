@@ -1,6 +1,18 @@
 #!/bin/sh
 
-eval "$(sh "$(cd "$(dirname "$0")"&&pwd)/../libexec/modulize.sh")"
+eval "$(
+  BIN="$0"
+  while true; do
+    cd "$(dirname "$BIN")"
+    BIN="$(basename "$BIN")"
+    if [ -L "$BIN" ]; then
+      BIN="$(readlink "$BIN")"
+    else
+      break
+    fi
+  done
+  sh ../libexec/modulize.sh
+)"
 
 use binutil
 
