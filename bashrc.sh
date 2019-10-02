@@ -4,6 +4,9 @@ command -v nodejs-yarn >/dev/null 2>&1 && alias yarn=nodejs-yarn
 # for tmux 256 color support
 alias tmux='tmux -2'
 
+# crontab
+alias cronedit='crontab -e'
+
 # configure fzf
 [ -f ~/.fzf.bash ] && . ~/.fzf.bash
 
