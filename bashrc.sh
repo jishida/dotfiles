@@ -40,14 +40,16 @@ alias gtags-pygments='gtags --gtagslabel=pygments'
 
 # nvim alias
 e() {
-  if [ -d "$1" ]; then
-    cd "$1"
-    nvim
-    return
-  fi
-  if [ -f "$1" ]; then
-    cd "$(dirname "$1")"
-    set -- "$(basename "$1")"
-  fi
-  nvim "$1"
+  (
+    if [ -d "$1" ]; then
+      cd "$1"
+      nvim
+      return
+    fi
+    if [ -f "$1" ]; then
+      cd "$(dirname "$1")"
+      set -- "$(basename "$1")"
+    fi
+    nvim "$1"
+  )
 }
