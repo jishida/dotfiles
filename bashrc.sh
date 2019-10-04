@@ -53,6 +53,10 @@ e() {
       cd "$(dirname "$1")"
       set -- "$(basename "$1")"
     fi
-    nvim "$1"
+    if [ -n "$1" ]; then
+      nvim "$1"
+    else
+      nvim
+    fi
   )
 }

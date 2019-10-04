@@ -10,6 +10,8 @@ set helplang=ja
 set laststatus=2
 set backspace=start,indent,eol
 set fenc=utf-8
+set list
+set listchars=tab:^\ ,trail:\ ,eol:↲,extends:»,precedes:«,nbsp:%
 
 set confirm
 set hidden
@@ -26,7 +28,6 @@ let g:swlen#default_column_end_ratio = 0.5
 let g:swlen#default_rows = 3
 " let g:swlen#default_row_end_ratio = 0.5
 
-source ~/.config/vim/plugins/ale.vim
 source ~/.config/vim/util.vim
 source ~/.config/vim/map.vim
 if filereadable(expand('~/.vimrc.local'))

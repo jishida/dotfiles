@@ -99,6 +99,9 @@ repo = "xolox/vim-misc"
 
 [[plugins]]
 repo = "dense-analysis/ale"
+hook_add = """
+source ~/.config/vim/plugins/ale.vim
+"""
 
 [[plugins]]
 repo = "pangloss/vim-javascript"
