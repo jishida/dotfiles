@@ -1,9 +1,11 @@
 # linuxbrew
-[ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
+test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # PATH
-PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/.yarn/bin:$PATH"
+pathmunge "$HOME/.local/bin"
+pathmunge "$HOME/.yarn/bin"
+pathmunge "$HOME/go/bin"
+pathmunge "$HOME/.cargo/bin"
 export PATH
 
 # fzf

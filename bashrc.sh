@@ -1,3 +1,16 @@
+# pathmunge
+pathmunge() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *)
+      case "$2" in
+        after) PATH="$PATH:$1";;
+        *)     PATH="$1:$PATH";;
+      esac
+      ;;
+  esac
+}
+
 # nodejs-yarn -> yarn
 command -v nodejs-yarn >/dev/null 2>&1 && alias yarn=nodejs-yarn
 
