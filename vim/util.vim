@@ -7,26 +7,38 @@ command! -bar Clear call s:clear_messages()
 
 source ~/.config/vim/swlen.vim
 
-function! InitDefaultDefx() abort
-  call EnterDefaultDefx()
-  call swlen#init_width({
-        \ 'count': get(g:, 'initdefx_count', 6),
-        \ 'start': get(g:, 'initdefx_start', 0),
-        \ 'end': get(g:, 'initdefx_end', 3),
-        \ 'pos': get(g:, 'initdefx_pos', 1),
-        \ 'step': get(g:, 'initdefx_step', 1),
-        \ 'margin-start': get(g:, 'initdefx_margin_start', 0),
-        \ 'margin-end': get(g:, 'initdefx_margin_end', 0)
-        \ })
-  call s:update_initdefx_tab_width()
-  call EnterDefaultDefx()
-endfunction
-
-function! EnterDefaultDefx() abort
+function! s:enter_default_defx() abort
   let var = s:initdefx_var()
   let suffix = exists(var) ? ' -winwidth='.float2nr(eval(var)) : ''
   execute 'Defx -listed -show-ignored-files -buffer-name=tab'.tabpagenr() '-split=vertical -direction=topleft -resume'.suffix
+  return empty(suffix)
+endfunction
+
+function! EnterDefaultDefx() abort
+  if s:enter_default_defx()
+    call swlen#init_width({
+          \ 'count': get(g:, 'initdefx_count', 6),
+          \ 'start': get(g:, 'initdefx_start', 0),
+          \ 'end': get(g:, 'initdefx_end', 3),
+          \ 'pos': get(g:, 'initdefx_pos', 1),
+          \ 'step': get(g:, 'initdefx_step', 1),
+          \ 'margin-start': get(g:, 'initdefx_margin_start', 0),
+          \ 'margin-end': get(g:, 'initdefx_margin_end', 0)
+          \ })
+    call s:update_initdefx_tab_width()
+    call s:enter_default_defx()
+  endif
   setlocal nowrap
+endfunction
+
+function! TabNewWithTerminal() abort
+  execute 'tabnew'
+  execute 'terminal'
+endfunction
+
+function! TabNewWithDefx() abort
+  execute 'tabnew'
+  call EnterDefaultDefx()
 endfunction
 
 command! -nargs=1 SwitchDefaultDefx call s:switch_default_defx(<f-args>)
@@ -45,7 +57,7 @@ endfunction
 
 function! s:on_vim_enter() abort
   if g:session_autoload !=? 'yes'
-    call InitDefaultDefx()
+    call EnterDefaultDefx()
   endif
 endfunction
 
