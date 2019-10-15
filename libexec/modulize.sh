@@ -4,11 +4,21 @@ DQ='"'
 printf '%s\n\n' "ROOT='$(cd "$(dirname "$0")/.."&&(pwd|sed -e "s/'/'$DQ'$DQ'/g"))'"
 
 cat -<<'__MODULIZE__'
-__MODULIZE_LOGGING_TEXT_DEBUG="$(printf '\e[90m%s\e[m' '[DEBUG]')"
-__MODULIZE_LOGGING_TEXT_INFO="$(printf '\e[94m%s\e[m' '[INFO]')"
-__MODULIZE_LOGGING_TEXT_WARN="$(printf '\e[93m%s\e[m' '[WARN]')"
-__MODULIZE_LOGGING_TEXT_ERROR="$(printf '\e[91m%s\e[m' '[ERROR]')"
-__MODULIZE_LOGGING_TEXT_FATAL="$(printf '\e[35m%s\e[m' '[FATAL]')"
+__MODULIZE_TPUT_VALID="$(command -v tput>/dev/null 2>&1&&echo 1||echo 0)"
+__MODULIZE_COLOR_BLACK="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput setaf 0)"
+__MODULIZE_COLOR_RED="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput setaf 1)"
+__MODULIZE_COLOR_GREEN="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput setaf 2)"
+__MODULIZE_COLOR_YELLOW="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput setaf 3)"
+__MODULIZE_COLOR_BLUE="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput setaf 4)"
+__MODULIZE_COLOR_MAGENTA="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput setaf 5)"
+__MODULIZE_COLOR_CYAN="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput setaf 6)"
+__MODULIZE_COLOR_WHITE="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput setaf 7)"
+__MODULIZE_COLOR_RESET="$(test "$__MODULIZE_TPUT_VALID" -eq 1&&tput sgr0)"
+__MODULIZE_LOGGING_TEXT_DEBUG="$(printf %s "$__MODULIZE_COLOR_BLUE[DEBUG]$__MODULIZE_COLOR_RESET")"
+__MODULIZE_LOGGING_TEXT_INFO="$(printf  %s "$__MODULIZE_COLOR_GREEN[INFO]$__MODULIZE_COLOR_RESET")"
+__MODULIZE_LOGGING_TEXT_WARN="$(printf  %s "$__MODULIZE_COLOR_YELLOW[WARN]$__MODULIZE_COLOR_RESET")"
+__MODULIZE_LOGGING_TEXT_ERROR="$(printf %s "$__MODULIZE_COLOR_RED[ERROR]$__MODULIZE_COLOR_RESET")"
+__MODULIZE_LOGGING_TEXT_FATAL="$(printf %s "$__MODULIZE_COLOR_MAGENTA[FATAL]$__MODULIZE_COLOR_RESET")"
 
 __MODULIZE_TEXTINFO="$(command -v info)"
 
@@ -23,10 +33,10 @@ LOG_ERROR=3
 LOG_FATAL=4
 
 case "$LOG_LEVEL" in
-  [Dd][Ee][Bb][Uu][Gg]) LOG_LEVEL=$LOG_DEBUG ;;
-  [Ww][Aa][Rr][Nn])     LOG_LEVEL=$LOG_WARN  ;;
-  [Ee][Rr][Rr][Oo][Rr]) LOG_LEVEL=$LOG_ERROR ;;
-  [Ff][Aa][Tt][Aa][Ll]) LOG_LEVEL=$LOG_FATAL ;;
+  [Dd][Ee][Bb][Uu][Gg]|$LOG_DEBUG) LOG_LEVEL=$LOG_DEBUG ;;
+  [Ww][Aa][Rr][Nn]    |$LOG_WARN ) LOG_LEVEL=$LOG_WARN  ;;
+  [Ee][Rr][Rr][Oo][Rr]|$LOG_ERROR) LOG_LEVEL=$LOG_ERROR ;;
+  [Ff][Aa][Tt][Aa][Ll]|$LOG_FATAL) LOG_LEVEL=$LOG_FATAL ;;
   *)                    LOG_LEVEL=$LOG_INFO  ;;
 esac
 
