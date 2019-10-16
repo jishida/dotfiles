@@ -148,3 +148,6 @@ on_cmd = "WhichKey"
 hook_source = """
 source ~/.config/vim/plugins/which-key.vim
 """
+
+[[plugins]]
+repo = "udalov/kotlin-vim"
