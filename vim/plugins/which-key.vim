@@ -108,7 +108,7 @@ call s:noremap( 'e.Q' , 'tabclose!'                 , 'force-close'   )
 let g:leader_map[' '] = { 'name': '+ale' }
 call s:noremap( '<Space>.i'   , 'ALEInfo'                          , 'info'            )
 call s:map(     '<Space>.o'   , '<Plug>(ale_hover)'                , 'hover'           )
-call s:map(     '<Space>.p'   , '<Plug>(ale_documentation)'        , 'hover'           )
+call s:map(     '<Space>.p'   , '<Plug>(ale_documentation)'        , 'documentation'   )
 call s:noremap( '<Space>.R'   , 'ALERename'                        , 'rename'          )
 call s:map(     '<Space>.l'   , '<Plug>(ale_lint)'                 , 'lint'            )
 call s:map(     '<Space>.m'   , '<Plug>(ale_detail)'               , 'detail'          )
