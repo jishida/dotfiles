@@ -3,6 +3,7 @@ let g:ale_linters = {
       \ 'typescript': ['tslint','tsserver'],
       \ 'c': ['ccls', 'clang', 'clangtidy'],
       \ 'cpp': ['ccls', 'clang', 'clangtidy'],
+      \ 'kotlin': ['languageserver'],
       \ }
 
 let g:ale_fixers = {
