@@ -10,16 +10,7 @@ repo = "w0ng/vim-hybrid"
 [[plugins]]
 repo = "itchyny/lightline.vim"
 hook_add = """
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'winnr', 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified', 'helloworld' ] ]
-      \ },
-      \ 'inactive': {
-      \   'left': [ [ 'winnr' ],
-      \             [ 'filename' ] ]
-      \ },
-      \ }
+source ~/.config/vim/plugins/lightline.vim
 """
 
 [[plugins]]
@@ -151,3 +142,22 @@ source ~/.config/vim/plugins/which-key.vim
 
 [[plugins]]
 repo = "udalov/kotlin-vim"
+
+[[plugins]]
+repo = "neoclide/coc.nvim"
+rev = "release"
+merged = 0
+hook_post_update = """
+call dein#source(['coc.nvim'])
+call coc#add_extension(
+      \ 'coc-json',
+      \ 'coc-python',
+      \ 'coc-tsserver',
+      \ 'coc-yaml',
+      \ 'coc-rls',
+      \ )
+"""
+hook_add = """
+call dein#source(['coc.nvim'])
+source ~/.config/vim/plugins/coc.vim
+"""

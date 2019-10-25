@@ -17,13 +17,13 @@ endfunction
 function! EnterDefaultDefx() abort
   if s:enter_default_defx()
     call swlen#init_width({
-          \ 'count': get(g:, 'initdefx_count', 6),
-          \ 'start': get(g:, 'initdefx_start', 0),
-          \ 'end': get(g:, 'initdefx_end', 3),
-          \ 'pos': get(g:, 'initdefx_pos', 1),
-          \ 'step': get(g:, 'initdefx_step', 1),
-          \ 'margin-start': get(g:, 'initdefx_margin_start', 0),
-          \ 'margin-end': get(g:, 'initdefx_margin_end', 0)
+          \ 'count'       : get(g:, 'initdefx_count'        , 6),
+          \ 'start'       : get(g:, 'initdefx_start'        , 0),
+          \ 'end'         : get(g:, 'initdefx_end'          , 3),
+          \ 'pos'         : get(g:, 'initdefx_pos'          , 1),
+          \ 'step'        : get(g:, 'initdefx_step'         , 1),
+          \ 'margin-start': get(g:, 'initdefx_margin_start' , 0),
+          \ 'margin-end'  : get(g:, 'initdefx_margin_end'   , 0)
           \ })
     call s:update_initdefx_tab_width()
     call s:enter_default_defx()

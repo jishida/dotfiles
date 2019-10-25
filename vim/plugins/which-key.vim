@@ -105,39 +105,109 @@ call s:noremap( 'e.L' , '+tabmove'                  , 'move-next'     )
 call s:noremap( 'e.q' , 'tabclose'                  , 'close'         )
 call s:noremap( 'e.Q' , 'tabclose!'                 , 'force-close'   )
 
-let g:leader_map[' '] = { 'name': '+ale' }
-call s:noremap( '<Space>.i'   , 'ALEInfo'                          , 'info'            )
-call s:map(     '<Space>.o'   , '<Plug>(ale_hover)'                , 'hover'           )
-call s:map(     '<Space>.p'   , '<Plug>(ale_documentation)'        , 'documentation'   )
-call s:noremap( '<Space>.R'   , 'ALERename'                        , 'rename'          )
-call s:map(     '<Space>.l'   , '<Plug>(ale_lint)'                 , 'lint'            )
-call s:map(     '<Space>.m'   , '<Plug>(ale_detail)'               , 'detail'          )
-call s:map(     '<Space>.r'   , '<Plug>(ale_find_references)'      , 'find-reference'  )
-call s:map(     '<Space>.f'   , '<Plug>(ale_fix)'                  , 'fix'             )
-call s:map(     '<Space>.e'   , '<Plug>(ale_next_wrap_error)'      , 'next-error'      )
-call s:map(     '<Space>.E'   , '<Plug>(ale_previous_wrap_error)'  , 'previous-error'  )
-call s:map(     '<Space>.w'   , '<Plug>(ale_next_wrap_warning)'    , 'next-warning'    )
-call s:map(     '<Space>.W'   , '<Plug>(ale_previous_wrap_warning)', 'previous-warning')
+" let g:leader_map[' '] = { 'name': '+ale' }
+" call s:noremap( '<Space>.i'   , 'ALEInfo'                          , 'info'            )
+" call s:map(     '<Space>.o'   , '<Plug>(ale_hover)'                , 'hover'           )
+" call s:map(     '<Space>.p'   , '<Plug>(ale_documentation)'        , 'documentation'   )
+" call s:noremap( '<Space>.R'   , 'ALERename'                        , 'rename'          )
+" call s:map(     '<Space>.l'   , '<Plug>(ale_lint)'                 , 'lint'            )
+" call s:map(     '<Space>.m'   , '<Plug>(ale_detail)'               , 'detail'          )
+" call s:map(     '<Space>.r'   , '<Plug>(ale_find_references)'      , 'find-reference'  )
+" call s:map(     '<Space>.f'   , '<Plug>(ale_fix)'                  , 'fix'             )
+" call s:map(     '<Space>.e'   , '<Plug>(ale_next_wrap_error)'      , 'next-error'      )
+" call s:map(     '<Space>.E'   , '<Plug>(ale_previous_wrap_error)'  , 'previous-error'  )
+" call s:map(     '<Space>.w'   , '<Plug>(ale_next_wrap_warning)'    , 'next-warning'    )
+" call s:map(     '<Space>.W'   , '<Plug>(ale_previous_wrap_warning)', 'previous-warning')
+"
+" let g:leader_map[' '].d = { 'name': '+go-to-definition' }
+" call s:map(     '<Space>.d.j' , '<Plug>(ale_go_to_definition)'          , 'current-window'  )
+" call s:map(     '<Space>.d.s' , '<Plug>(ale_go_to_definition_in_split)' , 'horizontal-split')
+" call s:map(     '<Space>.d.v' , '<Plug>(ale_go_to_definition_in_vsplit)', 'vertical-split'  )
+"
+" let g:leader_map[' '].t = { 'name': '+go-to-type-definition' }
+" call s:map(     '<Space>.t.j' , '<Plug>(ale_go_to_type_definition)'           , 'current-window'  )
+" call s:map(     '<Space>.t.s' , '<Plug>(ale_go_to_type_definition_in_split)'  , 'horizental-split')
+" call s:map(     '<Space>.t.v' , '<Plug>(ale_go_to_type_definition_in_vsplit)' , 'vertical-split'  )
+"
+" let g:leader_map[' '].q = { 'name': '+control' }
+" call s:map(     '<Space>.q.r' , '<Plug>(ale_reset_buffer)'  , 'reset-buffer'  )
+" call s:map(     '<Space>.q.R' , '<Plug>(ale_reset)'         , 'reset'         )
+" call s:map(     '<Space>.q.t' , '<Plug>(ale_toggle_buffer)' , 'toggle-buffer' )
+" call s:map(     '<Space>.q.T' , '<Plug>(ale_toggle)'        , 'toggle'        )
+" call s:map(     '<Space>.q.d' , '<Plug>(ale_disable_buffer)', 'disable-buffer')
+" call s:map(     '<Space>.q.D' , '<Plug>(ale_disable)'       , 'disable'       )
+" call s:map(     '<Space>.q.e' , '<Plug>(ale_enable_buffer)' , 'enable-buffer' )
+" call s:map(     '<Space>.q.E' , '<Plug>(ale_enable)'        , 'enable'        )
 
-let g:leader_map[' '].d = { 'name': '+go-to-definition' }
-call s:map(     '<Space>.d.j' , '<Plug>(ale_go_to_definition)'          , 'current-window'  )
-call s:map(     '<Space>.d.s' , '<Plug>(ale_go_to_definition_in_split)' , 'horizontal-split')
-call s:map(     '<Space>.d.v' , '<Plug>(ale_go_to_definition_in_vsplit)', 'vertical-split'  )
+let g:leader_map[' '] = { 'name': '+coc' }
+call s:noremap( '<Space>.<Space>' , 'CocList'                           , 'coc-list'                    )
+call s:noremap( '<Space>.I'       , '<Plug>(coc-diagnostic-info)'       , 'show-diagnostic-message'     )
+call s:noremap( '<Space>.m'       , '<Plug>(coc-diagnostic-next)'       , 'jump-to-next-diagnostic'     )
+call s:noremap( '<Space>.M'       , '<Plug>(coc-diagnostic-prev)'       , 'jump-to-previous-diagnostic' )
+call s:noremap( '<Space>.e'       , '<Plug>(coc-diagnostic-next-error)' , 'jump-to-next-error'          )
+call s:noremap( '<Space>.E'       , '<Plug>(coc-diagnostic-prev-error)' , 'jump-to-previous-error'      )
+call s:noremap( '<Space>.d'       , '<Plug>(coc-definition)'            , 'jump-to-definition'          )
+call s:noremap( '<Space>.D'       , '<Plug>(coc-declaration)'           , 'jump-to-declaration'         )
+call s:noremap( '<Space>.i'       , '<Plug>(coc-implementaion)'         , 'jump-to-implementaion'       )
+call s:noremap( '<Space>.t'       , '<Plug>(coc-type-definition)'       , 'jump-to-type-declaration'    )
+call s:noremap( '<Space>.r'       , '<Plug>(coc-reference)'             , 'jump-to-reference'           )
+call s:noremap( '<Space>.F'       , '<Plug>(coc-format-selected)'       , 'format-selected-range'       )
+call s:noremap( '<Space>.f'       , '<Plug>(coc-format)'                , 'format'                      )
+call s:noremap( '<Space>.R'       , '<Plug>(coc-rename)'                , 'rename-symbol'               )
+call s:noremap( '<Space>.a'       , '<Plug>(coc-codeaction)'            , 'code-action'                 )
+call s:noremap( '<Space>.A'       , '<Plug>(coc-codeaction-selected)'   , 'code-action-selected-region' )
+call s:noremap( '<Space>.l'       , '<Plug>(coc-openlink)'              , 'open-link'                   )
+call s:noremap( '<Space>.q'       , '<Plug>(coc-fix-current)'           , 'quickfix-action'             )
 
-let g:leader_map[' '].t = { 'name': '+go-to-type-definition' }
-call s:map(     '<Space>.t.j' , '<Plug>(ale_go_to_type_definition)'           , 'current-window'  )
-call s:map(     '<Space>.t.s' , '<Plug>(ale_go_to_type_definition_in_split)'  , 'horizental-split')
-call s:map(     '<Space>.t.v' , '<Plug>(ale_go_to_type_definition_in_vsplit)' , 'vertical-split'  )
+let g:leader_map[' '].w = { 'name': '+window' }
+call s:noremap( '<Space>.w.q' , '<Plug>(coc-float-hide)'            , 'hide-all-float-window'       )
+call s:noremap( '<Space>.w.j' , '<Plug>(coc-float-jump)'            , 'jump-to-first-float-window'  )
+call s:noremap( '<Space>.w.r' , '<Plug>(coc-refactor)'              , 'refactor'                    )
 
-let g:leader_map[' '].q = { 'name': '+control' }
-call s:map(     '<Space>.q.r' , '<Plug>(ale_reset_buffer)'  , 'reset-buffer'  )
-call s:map(     '<Space>.q.R' , '<Plug>(ale_reset)'         , 'reset'         )
-call s:map(     '<Space>.q.t' , '<Plug>(ale_toggle_buffer)' , 'toggle-buffer' )
-call s:map(     '<Space>.q.T' , '<Plug>(ale_toggle)'        , 'toggle'        )
-call s:map(     '<Space>.q.d' , '<Plug>(ale_disable_buffer)', 'disable-buffer')
-call s:map(     '<Space>.q.D' , '<Plug>(ale_disable)'       , 'disable'       )
-call s:map(     '<Space>.q.e' , '<Plug>(ale_enable_buffer)' , 'enable-buffer' )
-call s:map(     '<Space>.q.E' , '<Plug>(ale_enable)'        , 'enable'        )
+let g:leader_map[' '].s = { 'name': '+select' }
+call s:noremap( '<Space>.s.n' , '<Plug>(coc-range-select)'          , 'select-next-selection-range' )
+call s:noremap( '<Space>.s.p' , '<Plug>(coc-range-select-backward)' , 'select-prev-selection-range' )
+call s:noremap( '<Space>.s.i' , '<Plug>(coc-funcobj-i)'             , 'select-inside-function'      )
+call s:noremap( '<Space>.s.a' , '<Plug>(coc-funcobj-a)'             , 'select-current-function'     )
+
+let g:leader_map[' '].c = { 'name': '+config' }
+call s:noremap( '<Space>.c.j' , 'CocConfig'                         , 'open-current-window'         )
+call s:noremap( '<Space>.c.s' , 'split<CR>:<C-u>CocConfig'          , 'open-horizontal-split'       )
+call s:noremap( '<Space>.c.v' , 'vsplit<CR>:<C-u>CocConfig'         , 'open-vertical-split'         )
+
+let g:leader_map.a = { 'name': '+ale' }
+call s:noremap( 'a.i'   , 'ALEInfo'                          , 'info'            )
+call s:map(     'a.o'   , '<Plug>(ale_hover)'                , 'hover'           )
+call s:map(     'a.p'   , '<Plug>(ale_documentation)'        , 'documentation'   )
+call s:noremap( 'a.R'   , 'ALERename'                        , 'rename'          )
+call s:map(     'a.l'   , '<Plug>(ale_lint)'                 , 'lint'            )
+call s:map(     'a.m'   , '<Plug>(ale_detail)'               , 'detail'          )
+call s:map(     'a.r'   , '<Plug>(ale_find_references)'      , 'find-reference'  )
+call s:map(     'a.f'   , '<Plug>(ale_fix)'                  , 'fix'             )
+call s:map(     'a.e'   , '<Plug>(ale_next_wrap_error)'      , 'next-error'      )
+call s:map(     'a.E'   , '<Plug>(ale_previous_wrap_error)'  , 'previous-error'  )
+call s:map(     'a.w'   , '<Plug>(ale_next_wrap_warning)'    , 'next-warning'    )
+call s:map(     'a.W'   , '<Plug>(ale_previous_wrap_warning)', 'previous-warning')
+
+let g:leader_map.a.d = { 'name': '+go-to-definition' }
+call s:map(     'a.d.j' , '<Plug>(ale_go_to_definition)'          , 'current-window'  )
+call s:map(     'a.d.s' , '<Plug>(ale_go_to_definition_in_split)' , 'horizontal-split')
+call s:map(     'a.d.v' , '<Plug>(ale_go_to_definition_in_vsplit)', 'vertical-split'  )
+
+let g:leader_map.a.t = { 'name': '+go-to-type-definition' }
+call s:map(     'a.t.j' , '<Plug>(ale_go_to_type_definition)'           , 'current-window'  )
+call s:map(     'a.t.s' , '<Plug>(ale_go_to_type_definition_in_split)'  , 'horizental-split')
+call s:map(     'a.t.v' , '<Plug>(ale_go_to_type_definition_in_vsplit)' , 'vertical-split'  )
+
+let g:leader_map.a.q = { 'name': '+control' }
+call s:map(     'a.q.r' , '<Plug>(ale_reset_buffer)'  , 'reset-buffer'  )
+call s:map(     'a.q.R' , '<Plug>(ale_reset)'         , 'reset'         )
+call s:map(     'a.q.t' , '<Plug>(ale_toggle_buffer)' , 'toggle-buffer' )
+call s:map(     'a.q.T' , '<Plug>(ale_toggle)'        , 'toggle'        )
+call s:map(     'a.q.d' , '<Plug>(ale_disable_buffer)', 'disable-buffer')
+call s:map(     'a.q.D' , '<Plug>(ale_disable)'       , 'disable'       )
+call s:map(     'a.q.e' , '<Plug>(ale_enable_buffer)' , 'enable-buffer' )
+call s:map(     'a.q.E' , '<Plug>(ale_enable)'        , 'enable'        )
 
 let g:leader_map.f = { 'name': '+file' }
 call s:noremap( 'f.j'  , 'call EnterDefaultDefx()'                                , 'defx'                    )

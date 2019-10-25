@@ -1,9 +1,10 @@
+let g:ale_linters_explicit = 1
+
 let g:ale_linters = {
-      \ 'javascript': ['eslint','tsserver'],
-      \ 'typescript': ['tslint','tsserver'],
-      \ 'c': ['ccls', 'clang', 'clangtidy'],
-      \ 'cpp': ['ccls', 'clang', 'clangtidy'],
-      \ 'kotlin': ['languageserver'],
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['tslint'],
+      \ 'c': ['clangtidy'],
+      \ 'cpp': ['clangtidy'],
       \ }
 
 let g:ale_fixers = {

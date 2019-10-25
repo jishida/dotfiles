@@ -13,10 +13,14 @@ set fenc=utf-8
 set list
 set listchars=tab:^\ ,trail:\ ,eol:↲,extends:»,precedes:«,nbsp:%
 
+set cmdheight=2
+set signcolumn=yes
+
 set confirm
 set hidden
 set autoread
 set nobackup
+set nowritebackup
 set noswapfile
 
 set timeoutlen=500
