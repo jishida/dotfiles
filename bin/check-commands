@@ -1,0 +1,56 @@
+#!/bin/sh
+
+eval "$(
+  BIN="$0"
+  while true; do
+    cd "$(dirname "$BIN")"
+    BIN="$(basename "$BIN")"
+    if [ -L "$BIN" ]; then
+      BIN="$(readlink "$BIN")"
+    else
+      break
+    fi
+  done
+  sh ../libexec/modulize.sh
+)"
+
+use binutil
+use check
+
+bin_init check-commands
+
+check_command() {
+  check "$1"
+  if [ $? -eq 0 ]; then
+    info "$1 installed"
+  else
+    warn "$1 not installed"
+  fi
+}
+
+check_command gtags
+check_command global
+check_command ctags
+check_command rg
+check_command ag
+check_command fd
+check_command direnv
+check_command vim
+check_command nvim
+check_command java
+check_command python2
+check_command python3
+check_command pyenv
+check_command node
+check_command npm
+check_command yarn
+check_command rustc
+check_command cargo
+check_command go
+check_command rls
+check_command ccls
+check_command efm-langserver
+check_command kotlin-language-server
+check_command ktlint
+
+bin_exit

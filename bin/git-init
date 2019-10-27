@@ -37,7 +37,6 @@ debug_var GITIGNORE 4
 debug_var TIGCONFIG 4
 
 check git || warn "'git' command not found"
-check tig || warn "'tig' command not found"
 
 mklinkf "$GITIGNORE_SRC" "$GITIGNORE"
 mklinkf "$GITCONFIG_SRC" "$GITCONFIG"
