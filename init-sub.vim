@@ -8,7 +8,9 @@ set fenc=utf-8
 set list
 set listchars=tab:^\ ,trail:\ ,eol:↲,extends:»,precedes:«,nbsp:%
 
-tnoremap <C-c><C-c> <C-\><C-n>
+if has('terminal')
+  tnoremap <C-c><C-c> <C-\><C-n>
+endif
 
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
