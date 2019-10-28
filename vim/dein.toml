@@ -54,7 +54,16 @@ repo = "HerringtonDarkholme/yats.vim"
 
 [[plugins]]
 repo = "junegunn/fzf"
-build = "./install --bin"
+build = """
+case "$(uname -m)" in
+  x86_64|i[36]86)
+    ./install --bin
+    ;;
+  *)
+    make --verbose
+    ;;
+esac
+"""
 merged = 0
 lazy = 1
 
