@@ -61,6 +61,18 @@ if command -v direnv >/dev/null; then
 fi
 
 # nvm
+init_nvm() {
+  if [ -s "$1/nvm.sh" ]; then
+    . "$1/nvm.sh"
+    [ -s "$1/etc/bash_completion.d/nvm" ] && . "$1/etc/bash_completion.d/nvm"
+    return 0
+  fi
+  return 1
+}
+
 export NVM_DIR="$HOME/.nvm"
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+init_nvm "$HOME/.config/nvm" || init_nvm "/home/linuxbrew/.linuxbrew/opt/nvm"
+unset -f init_nvm
+
+#[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
