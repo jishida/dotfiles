@@ -93,6 +93,7 @@ unset -f init_nvm
 init_ssh_agent() {
   command -v ssh-agent>/dev/null||return 1
   set -- "$(
+    cmd='ssh-agent -s'
     pid_file="$HOME/.ssh/agent-pid"
     sock_file="$HOME/.ssh/agent-socket"
     pid="$(cat "$pid_file" 2>/dev/null)"
@@ -104,18 +105,18 @@ init_ssh_agent() {
       test -S "$socket_file" \
         || has_cache=0
       if [ $has_cache -eq 1 ]; then
-        ps -e -o uid,pid,cmd \
-          | awk -vUID="$(id -u)" -vPID=$pid '$1==UID&&$2==PID{print}' \
-          | sed -e 's/\s*[0-9]\+\s*[0-9]\+\s*//' \
-          | grep -e '^ssh-agent -s$'>/dev/null \
-          || has_cache=0
+        test "$cmd" = "$(
+          ps -e -o uid,pid,cmd \
+            | awk -vUID="$(id -u)" -vPID=$pid '$1==UID&&$2==PID{print}' \
+            | sed -e 's/\s*[0-9]\+\s*[0-9]\+\s*//'
+        )" || has_cache=0
       fi
     fi
     if [ $has_cache -eq 1 ]; then
       SSH_AGENT_PID="$pid"
       SSH_AUTH_SOCK="$sock"
     else
-      env="$(ssh-agent -s)"
+      env="$($cmd)"
       eval "$env">/dev/null
     fi
     test -n "$SSH_AGENT_PID"||return 1
@@ -133,5 +134,7 @@ init_ssh_agent() {
   export SSH_AUTH_SOCK
 }
 
-test -n "$SSH_AGENT_ENABLED" && init_ssh_agent
+if [ -n "$SSH_AGENT_ENABLED" ]; then
+  init_ssh_agent || echo 'failed to initialize ssh-agent'
+fi
 unset -f init_ssh_agent
