@@ -1,3 +1,16 @@
+# pathmunge
+pathmunge() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *)
+      case "$2" in
+        after) PATH="$PATH:$1";;
+        *)     PATH="$1:$PATH";;
+      esac
+      ;;
+  esac
+}
+
 # linuxbrew
 test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
@@ -6,6 +19,7 @@ pathmunge "$HOME/.local/bin"
 pathmunge "$HOME/.yarn/bin"
 pathmunge "$HOME/go/bin"
 pathmunge "$HOME/.cargo/bin"
+
 export PATH
 
 # fzf
@@ -73,6 +87,3 @@ init_nvm() {
 export NVM_DIR="$HOME/.nvm"
 init_nvm "$HOME/.config/nvm" || init_nvm "/home/linuxbrew/.linuxbrew/opt/nvm"
 unset -f init_nvm
-
-#[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-#[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
