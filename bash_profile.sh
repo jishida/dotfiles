@@ -87,3 +87,51 @@ init_nvm() {
 export NVM_DIR="$HOME/.nvm"
 init_nvm "$HOME/.config/nvm" || init_nvm "/home/linuxbrew/.linuxbrew/opt/nvm"
 unset -f init_nvm
+
+# ssh-agent
+
+init_ssh_agent() {
+  command -v ssh-agent>/dev/null||return 1
+  set -- "$(
+    pid_file="$HOME/.ssh/agent-pid"
+    sock_file="$HOME/.ssh/agent-socket"
+    pid="$(cat "$pid_file" 2>/dev/null)"
+    sock="$(cat "$sock_file" 2>/dev/null)"
+    has_cache=1
+    expr "$pid" : '^[0-9]\+$'>/dev/null \
+      || has_cache=0
+    if [ $has_cache -eq 1 ]; then
+      test -S "$socket_file" \
+        || has_cache=0
+      if [ $has_cache -eq 1 ]; then
+        ps -e -o uid,pid,cmd \
+          | awk -vUID="$(id -u)" -vPID=$pid '$1==UID&&$2==PID{print}' \
+          | sed -e 's/\s*[0-9]\+\s*[0-9]\+\s*//' \
+          | grep -e '^ssh-agent -s$'>/dev/null \
+          || has_cache=0
+      fi
+    fi
+    if [ $has_cache -eq 1 ]; then
+      SSH_AGENT_PID="$pid"
+      SSH_AUTH_SOCK="$sock"
+    else
+      env="$(ssh-agent -s)"
+      eval "$env">/dev/null
+    fi
+    test -n "$SSH_AGENT_PID"||return 1
+    test -n "$SSH_AUTH_SOCK"||return 1
+    if [ $has_cache -eq 0 ]; then
+      echo "$SSH_AGENT_PID">"$pid_file"&&chmod 600 "$pid_file">/dev/null
+      echo "$SSH_AUTH_SOCK">"$sock_file"&&chmod 600 "$sock_file">/dev/null
+    fi
+    printf '%s\n%s' "$SSH_AGENT_PID" "$SSH_AUTH_SOCK"
+  )"
+  test $? -ne 0&&return 1
+  SSH_AGENT_PID="$(printf %s "$1"|head -1)"
+  SSH_AUTH_SOCK="$(printf %s "$1"|tail -1)"
+  export SSH_AGENT_PID
+  export SSH_AUTH_SOCK
+}
+
+test -n "$SSH_AGENT_ENABLED" && init_ssh_agent
+unset -f init_ssh_agent
