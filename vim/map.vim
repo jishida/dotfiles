@@ -6,7 +6,6 @@ nnoremap <silent> <localleader> :<C-u>WhichKey ','<CR>
 inoremap <C-c> <Esc><Esc>
 
 " 端末ジョブモード→端末ノーマルモードへの移行
-tnoremap <C-Space> <C-\><C-n>
 tnoremap <C-c><C-c> <C-\><C-n>
 
 " gtags
@@ -55,8 +54,8 @@ nnoremap <C-A-h>      :<C-u>SwitchWidth -1<CR>
 nnoremap <C-A-l>      :<C-u>SwitchWidth 1<CR>
 
 " ale
-imap     <C-Space> <Plug>(ale_complete)
-nmap     <C-Down>  <Plug>(ale_next_wrap)
-nmap     <C-Up>    <Plug>(ale_previous_wrap)
-nmap     <C-Left>  <Plug>(ale_first)
-nmap     <C-Right> <Plug>(ale_last)
+imap     <C-A-Space>  <Plug>(ale_complete)
+nmap     <C-Down>     <Plug>(ale_next_wrap)
+nmap     <C-Up>       <Plug>(ale_previous_wrap)
+nmap     <C-Left>     <Plug>(ale_first)
+nmap     <C-Right>    <Plug>(ale_last)
