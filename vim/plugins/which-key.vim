@@ -1,10 +1,12 @@
 call which_key#register('<Space>', 'g:leader_map')
+call which_key#register(',', 'g:localleader_map')
 
 let s:spkey_dict = {
       \ '<Space>': ' ',
       \ '<Bar>'  : '|',
       \ }
-function! s:_map(key, cmd, desc, mapcmd) abort
+function! s:_map(key, cmd, desc, mapcmd, local) abort
+  let leaderkey = a:local ? '<localleader>' : '<leader>'
   let key = '.'.a:key
   let key = substitute(key, '\.\.', '.<Dot>', 'g')
   let key = strpart(key, 1)
@@ -19,9 +21,9 @@ function! s:_map(key, cmd, desc, mapcmd) abort
     endif
   endfor
   let key = remove(keys, -1)
-  let mapped_keys = '<leader>'.join(keys, '').key
+  let mapped_keys = leaderkey.join(keys, '').key
   let keys = map(keys, {_, val -> get(s:spkey_dict, val, val)})
-  let m = g:leader_map
+  let m = a:local ? g:localleader_map : g:leader_map
   for k in keys
     if !has_key(m, k)
       throw a:key.' not found'
@@ -31,7 +33,7 @@ function! s:_map(key, cmd, desc, mapcmd) abort
       throw a:key.' has not dictionary'
     endif
   endfor
-  if a:cmd =~? '^<'
+  if a:cmd =~? '^<Plug>'
     let cmd = a:cmd
   else
     let cmd = ':<C-u>'.a:cmd.'<CR>'
@@ -45,11 +47,19 @@ function! s:_map(key, cmd, desc, mapcmd) abort
 endfunction
 
 function! s:noremap(key, cmd, desc) abort
-  call s:_map(a:key, a:cmd, a:desc, 'nnoremap')
+  call s:_map(a:key, a:cmd, a:desc, 'nnoremap', 0)
 endfunction
 
 function! s:map(key, cmd, desc) abort
-  call s:_map(a:key, a:cmd, a:desc, 'nmap')
+  call s:_map(a:key, a:cmd, a:desc, 'nmap', 0)
+endfunction
+
+function! s:noremap_local(key, cmd, desc) abort
+  call s:_map(a:key, a:cmd, a:desc, 'nnoremap', 1)
+endfunction
+
+function! s:map_local(key, cmd, desc) abort
+  call s:_map(a:key, a:cmd, a:desc, 'nmap', 1)
 endfunction
 
 let g:leader_map = { '1-9': 'switch-window' }
@@ -141,34 +151,34 @@ call s:noremap( 'e.Q' , 'tabclose!'                 , 'force-close'   )
 
 let g:leader_map[' '] = { 'name': '+coc' }
 call s:noremap( '<Space>.<Space>' , 'CocList'                           , 'coc-list'                    )
-call s:noremap( '<Space>.I'       , '<Plug>(coc-diagnostic-info)'       , 'show-diagnostic-message'     )
-call s:noremap( '<Space>.m'       , '<Plug>(coc-diagnostic-next)'       , 'jump-to-next-diagnostic'     )
-call s:noremap( '<Space>.M'       , '<Plug>(coc-diagnostic-prev)'       , 'jump-to-previous-diagnostic' )
-call s:noremap( '<Space>.e'       , '<Plug>(coc-diagnostic-next-error)' , 'jump-to-next-error'          )
-call s:noremap( '<Space>.E'       , '<Plug>(coc-diagnostic-prev-error)' , 'jump-to-previous-error'      )
-call s:noremap( '<Space>.d'       , '<Plug>(coc-definition)'            , 'jump-to-definition'          )
-call s:noremap( '<Space>.D'       , '<Plug>(coc-declaration)'           , 'jump-to-declaration'         )
-call s:noremap( '<Space>.i'       , '<Plug>(coc-implementaion)'         , 'jump-to-implementaion'       )
-call s:noremap( '<Space>.t'       , '<Plug>(coc-type-definition)'       , 'jump-to-type-declaration'    )
-call s:noremap( '<Space>.r'       , '<Plug>(coc-reference)'             , 'jump-to-reference'           )
-call s:noremap( '<Space>.F'       , '<Plug>(coc-format-selected)'       , 'format-selected-range'       )
-call s:noremap( '<Space>.f'       , '<Plug>(coc-format)'                , 'format'                      )
-call s:noremap( '<Space>.R'       , '<Plug>(coc-rename)'                , 'rename-symbol'               )
-call s:noremap( '<Space>.a'       , '<Plug>(coc-codeaction)'            , 'code-action'                 )
-call s:noremap( '<Space>.A'       , '<Plug>(coc-codeaction-selected)'   , 'code-action-selected-region' )
-call s:noremap( '<Space>.l'       , '<Plug>(coc-openlink)'              , 'open-link'                   )
-call s:noremap( '<Space>.q'       , '<Plug>(coc-fix-current)'           , 'quickfix-action'             )
+call s:map(     '<Space>.I'       , '<Plug>(coc-diagnostic-info)'       , 'show-diagnostic-message'     )
+call s:map(     '<Space>.m'       , '<Plug>(coc-diagnostic-next)'       , 'jump-to-next-diagnostic'     )
+call s:map(     '<Space>.M'       , '<Plug>(coc-diagnostic-prev)'       , 'jump-to-previous-diagnostic' )
+call s:map(     '<Space>.e'       , '<Plug>(coc-diagnostic-next-error)' , 'jump-to-next-error'          )
+call s:map(     '<Space>.E'       , '<Plug>(coc-diagnostic-prev-error)' , 'jump-to-previous-error'      )
+call s:map(     '<Space>.d'       , '<Plug>(coc-definition)'            , 'jump-to-definition'          )
+call s:map(     '<Space>.D'       , '<Plug>(coc-declaration)'           , 'jump-to-declaration'         )
+call s:map(     '<Space>.i'       , '<Plug>(coc-implementaion)'         , 'jump-to-implementaion'       )
+call s:map(     '<Space>.t'       , '<Plug>(coc-type-definition)'       , 'jump-to-type-declaration'    )
+call s:map(     '<Space>.r'       , '<Plug>(coc-reference)'             , 'jump-to-reference'           )
+call s:map(     '<Space>.F'       , '<Plug>(coc-format-selected)'       , 'format-selected-range'       )
+call s:map(     '<Space>.f'       , '<Plug>(coc-format)'                , 'format'                      )
+call s:map(     '<Space>.R'       , '<Plug>(coc-rename)'                , 'rename-symbol'               )
+call s:map(     '<Space>.a'       , '<Plug>(coc-codeaction)'            , 'code-action'                 )
+call s:map(     '<Space>.A'       , '<Plug>(coc-codeaction-selected)'   , 'code-action-selected-region' )
+call s:map(     '<Space>.l'       , '<Plug>(coc-openlink)'              , 'open-link'                   )
+call s:map(     '<Space>.q'       , '<Plug>(coc-fix-current)'           , 'quickfix-action'             )
 
 let g:leader_map[' '].w = { 'name': '+window' }
-call s:noremap( '<Space>.w.q' , '<Plug>(coc-float-hide)'            , 'hide-all-float-window'       )
-call s:noremap( '<Space>.w.j' , '<Plug>(coc-float-jump)'            , 'jump-to-first-float-window'  )
-call s:noremap( '<Space>.w.r' , '<Plug>(coc-refactor)'              , 'refactor'                    )
+call s:map(     '<Space>.w.q' , '<Plug>(coc-float-hide)'            , 'hide-all-float-window'       )
+call s:map(     '<Space>.w.j' , '<Plug>(coc-float-jump)'            , 'jump-to-first-float-window'  )
+call s:map(     '<Space>.w.r' , '<Plug>(coc-refactor)'              , 'refactor'                    )
 
 let g:leader_map[' '].s = { 'name': '+select' }
-call s:noremap( '<Space>.s.n' , '<Plug>(coc-range-select)'          , 'select-next-selection-range' )
-call s:noremap( '<Space>.s.p' , '<Plug>(coc-range-select-backward)' , 'select-prev-selection-range' )
-call s:noremap( '<Space>.s.i' , '<Plug>(coc-funcobj-i)'             , 'select-inside-function'      )
-call s:noremap( '<Space>.s.a' , '<Plug>(coc-funcobj-a)'             , 'select-current-function'     )
+call s:map(     '<Space>.s.n' , '<Plug>(coc-range-select)'          , 'select-next-selection-range' )
+call s:map(     '<Space>.s.p' , '<Plug>(coc-range-select-backward)' , 'select-prev-selection-range' )
+call s:map(     '<Space>.s.i' , '<Plug>(coc-funcobj-i)'             , 'select-inside-function'      )
+call s:map(     '<Space>.s.a' , '<Plug>(coc-funcobj-a)'             , 'select-current-function'     )
 
 let g:leader_map[' '].c = { 'name': '+config' }
 call s:noremap( '<Space>.c.j' , 'CocConfig'                         , 'open-current-window'         )
@@ -286,3 +296,35 @@ call s:noremap( 'q.w' , 'quit'      , 'quit-window'       )
 call s:noremap( 'q.W' , 'quit!'     , 'force-quit-window' )
 call s:noremap( 'q.t' , 'tabclose'  , 'quit-tab'          )
 call s:noremap( 'q.T' , 'tabclose!' , 'force-quit-tab'    )
+
+let g:localleader_map = {}
+call s:map_local( 's' , '<Plug>(easymotion-s2)'     , 'easymotion-s2'    )
+call s:map_local( 'f' , '<Plug>(easymotion-f2)'     , 'easymotion-f2'    )
+call s:map_local( 'F' , '<Plug>(easymotion-F2)'     , 'easymotion-F2'    )
+call s:map_local( 't' , '<Plug>(easymotion-t2)'     , 'easymotion-t2'    )
+call s:map_local( 'T' , '<Plug>(easymotion-T2)'     , 'easymotion-T2'    )
+call s:map_local( 'j' , '<Plug>(easymotion-j)'      , 'easymotion-j'     )
+call s:map_local( 'k' , '<Plug>(easymotion-k)'      , 'easymotion-k'     )
+call s:map_local( 'b' , '<Plug>(easymotion-bd-jk)'  , 'easymotion-bd-jk' )
+call s:map_local( 'w' , '<Plug>(easymotion-bd-w)'   , 'easymotion-bd-w'  )
+call s:map_local( 'e' , '<Plug>(easymotion-bd-e)'   , 'easymotion-bd-e'  )
+
+let g:localleader_map[','] = { 'name': '+additional'}
+call s:map_local( ',.s' , '<Plug>(easymotion-s)'      , 'easymotion-s'     )
+call s:map_local( ',.f' , '<Plug>(easymotion-f)'      , 'easymotion-f'     )
+call s:map_local( ',.F' , '<Plug>(easymotion-F)'      , 'easymotion-F'     )
+call s:map_local( ',.t' , '<Plug>(easymotion-t)'      , 'easymotion-t'     )
+call s:map_local( ',.T' , '<Plug>(easymotion-T)'      , 'easymotion-T'     )
+call s:map_local( ',.j' , '<Plug>(easymotion-j)'      , 'easymotion-j'     )
+call s:map_local( ',.k' , '<Plug>(easymotion-k)'      , 'easymotion-k'     )
+call s:map_local( ',.b' , '<Plug>(easymotion-bd-jk)'  , 'easymotion-bd-jk' )
+call s:map_local( ',.w' , '<Plug>(easymotion-w)'      , 'easymotion-bd-w'  )
+call s:map_local( ',.W' , '<Plug>(easymotion-W)'      , 'easymotion-bd-W'  )
+call s:map_local( ',.e' , '<Plug>(easymotion-e)'      , 'easymotion-bd-e'  )
+call s:map_local( ',.E' , '<Plug>(easymotion-E)'      , 'easymotion-bd-E'  )
+
+let g:localleader_map.o = { 'name': '+overwin'}
+call s:map_local( 'o.s' , '<Plug>(easymotion-overwin-f2)'      , 'easymotion-overwin-f2'     )
+call s:map_local( 'o.f' , '<Plug>(easymotion-overwin-f)'       , 'easymotion-overwin-f'      )
+call s:map_local( 'o.l' , '<Plug>(easymotion-overwin-line)'    , 'easymotion-overwin-line'   )
+call s:map_local( 'o.w' , '<Plug>(easymotion-overwin-w)'       , 'easymotion-overwin-w'     )

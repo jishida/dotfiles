@@ -170,3 +170,11 @@ hook_add = """
 call dein#source(['coc.nvim'])
 source ~/.config/vim/plugins/coc.vim
 """
+
+[[plugins]]
+repo = "easymotion/vim-easymotion"
+hook_add = """
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys='asdfghjkl;qwertyuiop[]'''
+"""
