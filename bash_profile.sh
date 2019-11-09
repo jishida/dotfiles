@@ -1,4 +1,7 @@
-# pathmunge
+# linuxbrew
+test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+# PATH
 pathmunge() {
   case ":$PATH:" in
     *":$1:"*) ;;
@@ -11,15 +14,11 @@ pathmunge() {
   esac
 }
 
-# linuxbrew
-test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-# PATH
 pathmunge "$HOME/.local/bin"
 pathmunge "$HOME/.yarn/bin"
 pathmunge "$HOME/go/bin"
 pathmunge "$HOME/.cargo/bin"
-
+unset -f pathmunge
 export PATH
 
 # fzf
