@@ -20,9 +20,9 @@ function! s:_map(key, cmd, desc, mapcmd, local) abort
       throw a:key.' contains empty key'
     endif
   endfor
-  let key = remove(keys, -1)
-  let mapped_keys = leaderkey.join(keys, '').key
+  let mapped_keys = leaderkey.join(keys, '')
   let keys = map(keys, {_, val -> get(s:spkey_dict, val, val)})
+  let key = remove(keys, -1)
   let m = a:local ? g:localleader_map : g:leader_map
   for k in keys
     if !has_key(m, k)
