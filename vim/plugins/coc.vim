@@ -1,8 +1,3 @@
-if exists('g:coc_conf_loaded')
-  finish
-endif
-let g:coc_conf_loaded = 1
-
 call dein#source([ 'coc.nvim' ])
 
 call coc#config('list.insertMappings', {
@@ -15,6 +10,8 @@ call coc#config('list.normalMappings', {
       \   'v':      'action:vsplit',
       \   'p':      'action:preview',
       \ })
+call coc#config('python.jediEnabled', 0)
+
 let s:lsmap = {}
 
 if executable('ccls')
@@ -46,14 +43,53 @@ if executable('gopls')
         \ }
 endif
 
+if executable('docker-langserver')
+  let s:lsmap['dockerfile'] = {
+        \   'command': 'docker-langserver',
+        \   'filetypes': [ 'dockerfile' ],
+        \   'args': [ '--stdio' ],
+        \ }
+endif
+
+if executable('bash-language-server')
+  let s:lsmap['bash'] = {
+        \   'command': 'bash-language-server',
+        \   'filetypes': [ 'sh' ],
+        \   'args': [ 'start' ],
+        \   'ignoredRootPaths': [ '-' ],
+        \ }
+endif
+
+if executable('efm-langserver')
+  let s:efm_filetypes = []
+
+  if executable('vint')
+    call add(s:efm_filetypes, 'vim')
+  endif
+
+  if executable('markdownlint')
+    call add(s:efm_filetypes, 'markdown')
+  endif
+
+  if !empty(s:efm_filetypes)
+    let s:efm_config = expand('<sfile>:p:h').'/efm.yaml'
+    let s:lsmap['efm'] = {
+          \   'command': 'efm-langserver',
+          \   'args': [ '-c', s:efm_config ],
+          \   'filetypes': s:efm_filetypes,
+          \ }
+  endif
+endif
+
 call coc#config('languageserver', s:lsmap)
 
-function! InitCocExtension() abort
-  call coc#add_extension(
-        \   'coc-json',
-        \   'coc-python',
-        \   'coc-tsserver',
-        \   'coc-yaml',
-        \   'coc-rls',
-        \ )
-endfunction
+call coc#add_extension(
+      \   'coc-rls',
+      \   'coc-java',
+      \   'coc-json',
+      \   'coc-python',
+      \   'coc-tsserver',
+      \   'coc-yaml',
+      \   'coc-html',
+      \   'coc-css',
+      \ )

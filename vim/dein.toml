@@ -135,10 +135,6 @@ repo = "udalov/kotlin-vim"
 repo = "neoclide/coc.nvim"
 rev = "release"
 merged = 0
-hook_post_update = """
-source ~/.config/vim/plugins/coc.vim
-call InitCocExtension()
-"""
 hook_add = """
 source ~/.config/vim/plugins/coc.vim
 """

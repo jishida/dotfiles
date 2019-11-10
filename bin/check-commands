@@ -44,13 +44,19 @@ check_command pyenv
 check_command node
 check_command npm
 check_command yarn
+check_command rustup
 check_command rustc
 check_command cargo
 check_command go
+check_command gopls
 check_command rls
 check_command ccls
 check_command efm-langserver
+check_command bash-language-server
+check_command docker-langserver
 check_command kotlin-language-server
+check_command vint
+check_command markdownlint
 check_command ktlint
 
 bin_exit
