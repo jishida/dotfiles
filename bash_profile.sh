@@ -94,14 +94,14 @@ init_ssh_agent() {
   set -- "$(
     cmd='ssh-agent -s'
     pid_file="$HOME/.ssh/agent-pid"
-    sock_file="$HOME/.ssh/agent-socket"
+    sock_file="$HOME/.ssh/agent-sock"
     pid="$(cat "$pid_file" 2>/dev/null)"
     sock="$(cat "$sock_file" 2>/dev/null)"
     has_cache=1
     expr "$pid" : '^[0-9]\+$'>/dev/null \
       || has_cache=0
     if [ $has_cache -eq 1 ]; then
-      test -S "$socket_file" \
+      test -S "$sock" \
         || has_cache=0
       if [ $has_cache -eq 1 ]; then
         test "$cmd" = "$(
