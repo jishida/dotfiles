@@ -130,10 +130,13 @@ call s:map(     '<Space>.r'       , '<Plug>(coc-reference)'             , 'jump-
 call s:map(     '<Space>.F'       , '<Plug>(coc-format-selected)'       , 'format-selected-range'       )
 call s:map(     '<Space>.f'       , '<Plug>(coc-format)'                , 'format'                      )
 call s:map(     '<Space>.R'       , '<Plug>(coc-rename)'                , 'rename-symbol'               )
-call s:map(     '<Space>.a'       , '<Plug>(coc-codeaction)'            , 'code-action'                 )
-call s:map(     '<Space>.A'       , '<Plug>(coc-codeaction-selected)'   , 'code-action-selected-region' )
+call s:noremap( '<Space>.a'       , 'CocAction'                         , 'coc-action'                  )
 call s:map(     '<Space>.l'       , '<Plug>(coc-openlink)'              , 'open-link'                   )
 call s:map(     '<Space>.q'       , '<Plug>(coc-fix-current)'           , 'quickfix-action'             )
+
+let g:leader_map[' '].o = { 'name': '+output' }
+call s:noremap( '<Space>.o.i'     , 'CocInfo'                           , 'coc-info'                    )
+call s:noremap( '<Space>.o.l'     , 'CocOpenLog'                        , 'coc-open-log'                )
 
 let g:leader_map[' '].w = { 'name': '+window' }
 call s:map(     '<Space>.w.q' , '<Plug>(coc-float-hide)'            , 'hide-all-float-window'       )

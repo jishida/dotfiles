@@ -30,10 +30,6 @@ repo = "Shougo/context_filetype.vim"
 repo = "cespare/vim-toml"
 on_ft = "toml"
 
-# [[plugins]]
-# repo = "nixprime/cpsm"
-# build = "sh -c 'PY3=ON ./install.sh'"
-
 [[plugins]]
 repo = "raghur/fruzzy"
 on_source = ["denite.nvim"]
@@ -45,12 +41,6 @@ call fruzzy#install()
 
 [[plugins]]
 repo = "HerringtonDarkholme/yats.vim"
-
-# [[plugins]]
-# repo = "mhartington/nvim-typescript"
-# build = "./install.sh"
-# depends = "deoplete.nvim"
-# on_ft = ["typescript", "typescript.tsx"]
 
 [[plugins]]
 repo = "junegunn/fzf"
@@ -80,18 +70,7 @@ on_cmd = "Defx"
 repo = "xolox/vim-session"
 depends = ["xolox/vim-misc"]
 hook_add = """
-let s:directory = getcwd() . '/.vim/sessions'
-if isdirectory(s:directory)
-  let g:session_directory = s:directory
-  let g:session_autosave = 'yes'
-  let g:session_autoload = 'yes'
-  let g:session_autosave_periodic = 5
-else
-  let g:session_directory = '~/.config/vim/sessions'
-  let g:session_autosave = 'no'
-  let g:session_autoload = 'no'
-endif
-unlet s:directory
+source ~/.config/vim/plugins/session.vim
 """
 
 [[plugins]]
@@ -157,17 +136,10 @@ repo = "neoclide/coc.nvim"
 rev = "release"
 merged = 0
 hook_post_update = """
-call dein#source(['coc.nvim'])
-call coc#add_extension(
-      \ 'coc-json',
-      \ 'coc-python',
-      \ 'coc-tsserver',
-      \ 'coc-yaml',
-      \ 'coc-rls',
-      \ )
+source ~/.config/vim/plugins/coc.vim
+call InitCocExtension()
 """
 hook_add = """
-call dein#source(['coc.nvim'])
 source ~/.config/vim/plugins/coc.vim
 """
 
