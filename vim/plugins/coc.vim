@@ -38,6 +38,14 @@ if executable('kotlin-language-server')
         \ }
 endif
 
+if executable('gopls')
+  let s:lsmap['golang'] = {
+        \   'command': 'gopls',
+        \   'filetypes': [ 'go' ],
+        \   'rootPatterns': [ 'go.mod' ],
+        \ }
+endif
+
 call coc#config('languageserver', s:lsmap)
 
 function! InitCocExtension() abort
