@@ -121,8 +121,11 @@ init_ssh_agent() {
     test -n "$SSH_AGENT_PID"||return 1
     test -n "$SSH_AUTH_SOCK"||return 1
     if [ $has_cache -eq 0 ]; then
-      echo "$SSH_AGENT_PID">"$pid_file"&&chmod 600 "$pid_file">/dev/null
-      echo "$SSH_AUTH_SOCK">"$sock_file"&&chmod 600 "$sock_file">/dev/null
+      (
+        umask 0177
+        echo "$SSH_AGENT_PID">"$pid_file"
+        echo "$SSH_AUTH_SOCK">"$sock_file"
+      )
     fi
     printf '%s\n%s' "$SSH_AGENT_PID" "$SSH_AUTH_SOCK"
   )"
