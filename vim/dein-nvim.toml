@@ -1,9 +1,13 @@
 [[plugins]]
 repo = "Shougo/denite.nvim"
 on_cmd = "Denite"
+depends = ["coc-denite"]
 hook_source = """
 source ~/.config/vim/plugins/denite.vim
 """
+
+[[plugins]]
+repo = "neoclide/coc-denite"
 
 # [[plugins]]
 # repo = "Shougo/deoplete.nvim"

@@ -190,7 +190,13 @@ call s:nmap('f.g'  , 'Denite grep -buffer-name=denite-grep'                   , 
 call s:nmap('f.F'  , 'Denite file -buffer-name=denite-file'                   , 'denite file'             )
 call s:nmap('f.f'  , 'Denite file/rec -buffer-name=denite-file'               , 'denite file/rec'         )
 call s:nmap('f.h'  , 'Denite file/rec:~ -buffer-name=denite-file'             , 'denite file/rec:~'       )
-call s:nmap('f.c'  , 'Denite file/rec:~/.config/vim -buffer-name=denite-file' , 'denite file/rec:[config]')
+"call s:nmap('f.c'  , 'Denite file/rec:~/.config/vim -buffer-name=denite-file' , 'denite file/rec:[config]')
+call s:nmap('f.d'  , 'Denite coc-diagnostic -buffer-name=denite-coc-diagnostic' , 'coc-diagnostic'        )
+call s:nmap('f.l'  , 'Denite coc-symbols -buffer-name=denite-coc-symbols'       , 'coc-symbols'           )
+call s:nmap('f.L'  , 'Denite coc-workspace -buffer-name=denite-coc-workspace'   , 'coc-workspace'         )
+call s:nmap('f.s'  , 'Denite coc-source -buffer-name=denite-coc-source'         , 'coc-source'            )
+call s:nmap('f.S'  , 'Denite coc-service -buffer-name=denite-coc-service'       , 'coc-service'           )
+call s:nmap('f.c'  , 'Denite coc-command -buffer-name=denite-coc-command'       , 'coc-command'           )
 
 let g:leader_map.f.w = { 'name': '+cursor-word' }
 call s:nmap('f.w.g', 'DeniteCursorWord grep -buffer-name=denite-grep'         , 'denite grep'             )
