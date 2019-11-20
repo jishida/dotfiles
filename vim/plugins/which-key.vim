@@ -319,23 +319,23 @@ call s:lnmap('l.F'    , '<Plug>(easymotion-Fl)'           , 'easymotion-Fl'     
 call s:lnmap('l.t'    , '<Plug>(easymotion-tl)'           , 'easymotion-tl'           )
 call s:lnmap('l.T'    , '<Plug>(easymotion-Tl)'           , 'easymotion-Tl'           )
 
-let g:localleader_map.n = { 'name': '+anychars' }
-call s:lnmap('n.s'    , '<Plug>(easymotion-sn)'           , 'easymotion-sn'           )
-call s:lnmap('n.f'    , '<Plug>(easymotion-fn)'           , 'easymotion-fn'           )
-call s:lnmap('n.F'    , '<Plug>(easymotion-Fn)'           , 'easymotion-Fn'           )
-call s:lnmap('n.t'    , '<Plug>(easymotion-tn)'           , 'easymotion-tn'           )
-call s:lnmap('n.T'    , '<Plug>(easymotion-Tn)'           , 'easymotion-Tn'           )
+let g:localleader_map.a = { 'name': '+anychars' }
+call s:lnmap('a.s'    , '<Plug>(easymotion-sn)'           , 'easymotion-sn'           )
+call s:lnmap('a.f'    , '<Plug>(easymotion-fn)'           , 'easymotion-fn'           )
+call s:lnmap('a.F'    , '<Plug>(easymotion-Fn)'           , 'easymotion-Fn'           )
+call s:lnmap('a.t'    , '<Plug>(easymotion-tn)'           , 'easymotion-tn'           )
+call s:lnmap('a.T'    , '<Plug>(easymotion-Tn)'           , 'easymotion-Tn'           )
 
-let g:localleader_map.l.n = { 'name': '+anychars' }
-call s:lnmap('l.n.s'  , '<Plug>(easymotion-sln)'          , 'easymotion-sln'          )
-call s:lnmap('l.n.f'  , '<Plug>(easymotion-fln)'          , 'easymotion-fln'          )
-call s:lnmap('l.n.F'  , '<Plug>(easymotion-Fln)'          , 'easymotion-Fln'          )
-call s:lnmap('l.n.t'  , '<Plug>(easymotion-tln)'          , 'easymotion-tln'          )
-call s:lnmap('l.n.T'  , '<Plug>(easymotion-Tln)'          , 'easymotion-Tln'          )
+let g:localleader_map.l.a = { 'name': '+anychars' }
+call s:lnmap('l.a.s'  , '<Plug>(easymotion-sln)'          , 'easymotion-sln'          )
+call s:lnmap('l.a.f'  , '<Plug>(easymotion-fln)'          , 'easymotion-fln'          )
+call s:lnmap('l.a.F'  , '<Plug>(easymotion-Fln)'          , 'easymotion-Fln'          )
+call s:lnmap('l.a.t'  , '<Plug>(easymotion-tln)'          , 'easymotion-tln'          )
+call s:lnmap('l.a.T'  , '<Plug>(easymotion-Tln)'          , 'easymotion-Tln'          )
 
-let g:localleader_map.n.l = { 'name': '+line' }
-call s:lnmap('n.l.s'  , '<Plug>(easymotion-sln)'          , 'easymotion-sln'          )
-call s:lnmap('n.l.f'  , '<Plug>(easymotion-fln)'          , 'easymotion-fln'          )
-call s:lnmap('n.l.F'  , '<Plug>(easymotion-Fln)'          , 'easymotion-Fln'          )
-call s:lnmap('n.l.t'  , '<Plug>(easymotion-tln)'          , 'easymotion-tln'          )
-call s:lnmap('n.l.T'  , '<Plug>(easymotion-Tln)'          , 'easymotion-Tln'          )
+let g:localleader_map.a.l = { 'name': '+line' }
+call s:lnmap('a.l.s'  , '<Plug>(easymotion-sln)'          , 'easymotion-sln'          )
+call s:lnmap('a.l.f'  , '<Plug>(easymotion-fln)'          , 'easymotion-fln'          )
+call s:lnmap('a.l.F'  , '<Plug>(easymotion-Fln)'          , 'easymotion-Fln'          )
+call s:lnmap('a.l.t'  , '<Plug>(easymotion-tln)'          , 'easymotion-tln'          )
+call s:lnmap('a.l.T'  , '<Plug>(easymotion-Tln)'          , 'easymotion-Tln'          )
