@@ -87,6 +87,15 @@ export NVM_DIR="$HOME/.nvm"
 init_nvm "$HOME/.config/nvm" || init_nvm "/home/linuxbrew/.linuxbrew/opt/nvm"
 unset -f init_nvm
 
+# pyenv
+if [ -x "$HOME/.pyenv/bin/pyenv" ]; then
+  PYENV_ROOT="$HOME/.pyenv"
+  PATH="$PYENV_ROOT/bin:$PATH"
+  export PYENV_ROOT
+  export PATH
+  eval "$(pyenv init -)"
+fi
+
 # ssh-agent
 
 init_ssh_agent() {
