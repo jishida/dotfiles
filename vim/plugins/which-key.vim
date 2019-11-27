@@ -61,7 +61,7 @@ let g:leader_map = { '1-9': 'switch-window' }
 for i in [1,2,3,4,5,6,7,8,9]
   call s:nmap(i, i.'wincmd w', '')
 endfor
-call s:nmap('r' ,'<C-l>', 'refresh')
+call s:nmap('r' ,'redraw!', 'refresh')
 
 let g:leader_map.w = { 'name': '+window' }
 call s:nmap('w.q'     , 'quit'              , 'quit'               )
@@ -185,12 +185,12 @@ call s:nmap('a.q.E'           , '<Plug>(ale_enable)'                          , 
 
 let g:leader_map.f = { 'name': '+file' }
 call s:nmap('f.j'  , 'call EnterDefaultDefx()'                                , 'defx'                    )
+call s:nmap('f.k'  , 'call EnterDefaultDefxCurrent()'                         , 'defx(current file)'      )
 call s:nmap('f.o'  , 'Denite file/old'                                        , 'denite file/old'         )
 call s:nmap('f.g'  , 'Denite grep -buffer-name=denite-grep'                   , 'denite grep'             )
 call s:nmap('f.F'  , 'Denite file -buffer-name=denite-file'                   , 'denite file'             )
 call s:nmap('f.f'  , 'Denite file/rec -buffer-name=denite-file'               , 'denite file/rec'         )
 call s:nmap('f.h'  , 'Denite file/rec:~ -buffer-name=denite-file'             , 'denite file/rec:~'       )
-"call s:nmap('f.c'  , 'Denite file/rec:~/.config/vim -buffer-name=denite-file' , 'denite file/rec:[config]')
 call s:nmap('f.d'  , 'Denite coc-diagnostic -buffer-name=denite-coc-diagnostic' , 'coc-diagnostic'        )
 call s:nmap('f.l'  , 'Denite coc-symbols -buffer-name=denite-coc-symbols'       , 'coc-symbols'           )
 call s:nmap('f.L'  , 'Denite coc-workspace -buffer-name=denite-coc-workspace'   , 'coc-workspace'         )

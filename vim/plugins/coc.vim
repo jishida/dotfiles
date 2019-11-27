@@ -1,5 +1,3 @@
-call dein#source([ 'coc.nvim' ])
-
 call coc#config('list.insertMappings', {
       \   '<C-c>': 'do:exit',
       \   '<C-j>': 'do:next',

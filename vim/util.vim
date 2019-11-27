@@ -31,6 +31,15 @@ function! EnterDefaultDefx() abort
   setlocal nowrap
 endfunction
 
+function! EnterDefaultDefxCurrent() abort
+  let dir = expand('%:p:h')
+  echom dir
+  call EnterDefaultDefx()
+  if !empty(dir)
+    call defx#call_action('cd', [dir])
+  endif
+endfunction
+
 function! TabNewWithTerminal() abort
   execute 'tabnew'
   execute 'terminal'
