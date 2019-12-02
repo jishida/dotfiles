@@ -8,7 +8,14 @@ call coc#config('list.normalMappings', {
       \   'v':      'action:vsplit',
       \   'p':      'action:preview',
       \ })
-call coc#config('python.jediEnabled', 0)
+
+if executable('pyls')
+  call coc#config('python.jediEnabled', 1)
+  call coc#config('python.linting.flake8Enabled', executable('flake8') ? 1 : 0)
+  call coc#config('python.linting.pylintEnabled', executable('pylint') ? 1 : 0)
+else
+  call coc#config('python.jediEnabled', 0)
+endif
 
 let s:lsmap = {}
 
