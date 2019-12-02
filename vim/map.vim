@@ -53,9 +53,8 @@ nnoremap <C-A-k>      :<C-u>SwitchHeight 1<CR>
 nnoremap <C-A-h>      :<C-u>SwitchWidth -1<CR>
 nnoremap <C-A-l>      :<C-u>SwitchWidth 1<CR>
 
-" ale
-imap     <C-A-Space>  <Plug>(ale_complete)
-nmap     <C-Down>     <Plug>(ale_next_wrap)
-nmap     <C-Up>       <Plug>(ale_previous_wrap)
-nmap     <C-Left>     <Plug>(ale_first)
-nmap     <C-Right>    <Plug>(ale_last)
+" " ale
+" nmap     <C-Down>     <Plug>(ale_next_wrap)
+" nmap     <C-Up>       <Plug>(ale_previous_wrap)
+" nmap     <C-Left>     <Plug>(ale_first)
+" nmap     <C-Right>    <Plug>(ale_last)
