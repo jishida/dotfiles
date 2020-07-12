@@ -100,16 +100,19 @@ vagrant_alias ubuntu1904
 vagrant_alias fedora30
 vagrant_alias freebsd12
 vagrant_alias centos7
+vagrant_alias openindiana-hipster
 
 VAGRANT_CURRENT_UBUNTU=ubuntu1904
 VAGRANT_CURRENT_FEDORA=fedora30
 VAGRANT_CURRENT_FREEBSD=freebsd12
 VAGRANT_CURRENT_CENTOS=centos7
+VAGRANT_CURRENT_INDIANA=openindiana-hipster
 
 alias ubuntu="$VAGRANT_CURRENT_UBUNTU"
 alias fedora="$VAGRANT_CURRENT_FEDORA"
 alias freebsd="$VAGRANT_CURRENT_FREEBSD"
 alias centos="$VAGRANT_CURRENT_CENTOS"
+alias indiana="$VAGRANT_CURRENT_INDIANA"
 
 alias hyperv="$USERHOME/scripts/hypervisor.bat"
 
