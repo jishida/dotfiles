@@ -1,5 +1,5 @@
 nnoremap <silent> <leader> :<C-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<C-u>WhichKey ','<CR>
+nnoremap <silent> <localleader> :<C-u>WhichKey 's'<CR>
 
 " Escape
 "inoremap <C-Space> <Esc><Esc>
