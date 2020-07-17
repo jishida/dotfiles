@@ -25,7 +25,7 @@ set noswapfile
 
 set timeoutlen=500
 let g:mapleader = "\<Space>"
-let g:maplocalleader = 's'
+let g:maplocalleader = '.'
 
 let g:netrw_liststyle=3
 let g:netrw_preview=1

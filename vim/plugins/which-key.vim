@@ -1,5 +1,5 @@
 call which_key#register('<Space>', 'g:leader_map')
-call which_key#register('s', 'g:localleader_map')
+call which_key#register('.', 'g:localleader_map')
 
 let s:spkey_dict = {
       \ '<Space>': ' ',
@@ -11,7 +11,7 @@ function! s:_map(key, cmd, desc, prefix, local) abort
   let key = substitute(key, '\.\.', '.<Dot>', 'g')
   let key = strpart(key, 1)
   let keys = split(key, '\.')
-  let keys = map(keys, {_, val -> val =~? '^<dot>$' ? '.' : val})
+  let keys = map(keys, {_, val -> val =~? '^<Dot>$' ? '.' : val})
   if len(keys) == 0
     throw a:key.' is invalid'
   endif
@@ -268,7 +268,7 @@ call s:nmap('q.t'   , 'tabclose'    , 'quit-tab'          )
 call s:nmap('q.T'   , 'tabclose!'   , 'force-quit-tab'    )
 
 let g:localleader_map = {}
-"call s:lnmap('s'          , '<Plug>(easymotion-s2)'         , 'easymotion-s2'             )
+call s:lnmap('s'          , '<Plug>(easymotion-s2)'         , 'easymotion-s2'             )
 call s:lnmap('<Space>'    , '<Plug>(easymotion-s2)'         , 'easymotion-s2'             )
 call s:lnmap('f'          , '<Plug>(easymotion-f2)'         , 'easymotion-f2'             )
 call s:lnmap('F'          , '<Plug>(easymotion-F2)'         , 'easymotion-F2'             )
@@ -278,8 +278,8 @@ call s:lnmap('j'          , '<Plug>(easymotion-sol-j)'      , 'easymotion-sol-j'
 call s:lnmap('J'          , '<Plug>(easymotion-eol-j)'      , 'easymotion-eol-j'          )
 call s:lnmap('k'          , '<Plug>(easymotion-sol-k)'      , 'easymotion-sol-k'          )
 call s:lnmap('K'          , '<Plug>(easymotion-eol-k)'      , 'easymotion-eol-k'          )
-call s:lnmap('m'          , '<Plug>(easymotion-sol-bd-jk)'  , 'easymotion-sol-bd-jk'      )
-call s:lnmap('<Dot>'      , '<Plug>(easymotion-eol-bd-jk)'  , 'easymotion-eol-bd-jk'      )
+call s:lnmap(','          , '<Plug>(easymotion-sol-bd-jk)'  , 'easymotion-sol-bd-jk'      )
+call s:lnmap('/'          , '<Plug>(easymotion-eol-bd-jk)'  , 'easymotion-eol-bd-jk'      )
 call s:lnmap('w'          , '<Plug>(easymotion-bd-w)'       , 'easymotion-bd-w'           )
 call s:lnmap('W'          , '<Plug>(easymotion-bd-W)'       , 'easymotion-bd-W'           )
 call s:lnmap('e'          , '<Plug>(easymotion-bd-e)'       , 'easymotion-bd-e'           )
@@ -288,27 +288,27 @@ call s:lnmap('r'          , '<Plug>(easymotion-repeat)'     , 'easymotion-repeat
 call s:lnmap('n'          , '<Plug>(easymotion-n)'          , 'easymotion-n'              )
 call s:lnmap('N'          , '<Plug>(easymotion-N)'          , 'easymotion-N'              )
 
-let g:localleader_map['s'] = { 'name': '+basic' }
-call s:lnmap('s.s'  , '<Plug>(easymotion-s)'            , 'easymotion-s'            )
-call s:lnmap('s.f'  , '<Plug>(easymotion-f)'            , 'easymotion-f'            )
-call s:lnmap('s.F'  , '<Plug>(easymotion-F)'            , 'easymotion-F'            )
-call s:lnmap('s.t'  , '<Plug>(easymotion-t)'            , 'easymotion-t'            )
-call s:lnmap('s.T'  , '<Plug>(easymotion-T)'            , 'easymotion-T'            )
-call s:lnmap('s.w'  , '<Plug>(easymotion-w)'            , 'easymotion-w'            )
-call s:lnmap('s.W'  , '<Plug>(easymotion-W)'            , 'easymotion-W'            )
-call s:lnmap('s.b'  , '<Plug>(easymotion-b)'            , 'easymotion-b'            )
-call s:lnmap('s.B'  , '<Plug>(easymotion-B)'            , 'easymotion-B'            )
-call s:lnmap('s.e'  , '<Plug>(easymotion-e)'            , 'easymotion-e'            )
-call s:lnmap('s.E'  , '<Plug>(easymotion-E)'            , 'easymotion-E'            )
-call s:lnmap('s.j'  , '<Plug>(easymotion-sol-j)'        , 'easymotion-sol-j'        )
-call s:lnmap('s.k'  , '<Plug>(easymotion-sol-k)'        , 'easymotion-sol-k'        )
-call s:lnmap('s.J'  , '<Plug>(easymotion-eol-j)'        , 'easymotion-eol-j'        )
-call s:lnmap('s.K'  , '<Plug>(easymotion-eol-k)'        , 'easymotion-eol-k'        )
-call s:lnmap('s./'  , '<Plug>(easymotion-sn)'           , 'easymotion-sn'           )
+let g:localleader_map['.'] = { 'name': '+basic' }
+call s:lnmap('..s'  , '<Plug>(easymotion-s)'            , 'easymotion-s'            )
+call s:lnmap('..f'  , '<Plug>(easymotion-f)'            , 'easymotion-f'            )
+call s:lnmap('..F'  , '<Plug>(easymotion-F)'            , 'easymotion-F'            )
+call s:lnmap('..t'  , '<Plug>(easymotion-t)'            , 'easymotion-t'            )
+call s:lnmap('..T'  , '<Plug>(easymotion-T)'            , 'easymotion-T'            )
+call s:lnmap('..w'  , '<Plug>(easymotion-w)'            , 'easymotion-w'            )
+call s:lnmap('..W'  , '<Plug>(easymotion-W)'            , 'easymotion-W'            )
+call s:lnmap('..b'  , '<Plug>(easymotion-b)'            , 'easymotion-b'            )
+call s:lnmap('..B'  , '<Plug>(easymotion-B)'            , 'easymotion-B'            )
+call s:lnmap('..e'  , '<Plug>(easymotion-e)'            , 'easymotion-e'            )
+call s:lnmap('..E'  , '<Plug>(easymotion-E)'            , 'easymotion-E'            )
+call s:lnmap('..j'  , '<Plug>(easymotion-sol-j)'        , 'easymotion-sol-j'        )
+call s:lnmap('..k'  , '<Plug>(easymotion-sol-k)'        , 'easymotion-sol-k'        )
+call s:lnmap('..J'  , '<Plug>(easymotion-eol-j)'        , 'easymotion-eol-j'        )
+call s:lnmap('..K'  , '<Plug>(easymotion-eol-k)'        , 'easymotion-eol-k'        )
+call s:lnmap('../'  , '<Plug>(easymotion-sn)'           , 'easymotion-sn'           )
 
-let g:localleader_map['s'].g = { 'name': '+ge/gE' }
-call s:lnmap('s.g.e', '<Plug>(easymotion-ge)'           , 'easymotion-ge'           )
-call s:lnmap('s.g.E', '<Plug>(easymotion-gE)'           , 'easymotion-gE'           )
+let g:localleader_map['.'].g = { 'name': '+ge/gE' }
+call s:lnmap('..g.e', '<Plug>(easymotion-ge)'           , 'easymotion-ge'           )
+call s:lnmap('..g.E', '<Plug>(easymotion-gE)'           , 'easymotion-gE'           )
 
 let g:localleader_map.o = { 'name': '+overwin' }
 call s:lnmap('o.s'        , '<Plug>(easymotion-overwin-f2)'   , 'easymotion-overwin-f2'   )
