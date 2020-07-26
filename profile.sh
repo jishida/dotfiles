@@ -70,11 +70,6 @@ GTAGSLABEL=native-pygments
 export GTAGSCONF
 export GTAGSLABEL
 
-# direnv
-if command -v direnv >/dev/null; then
-  eval "$(direnv hook bash)"
-fi
-
 # nvm
 init_nvm() {
   if [ -s "$1/nvm.sh" ]; then

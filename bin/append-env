@@ -28,12 +28,12 @@ END_LINE="# end $BIN_NAME block"
 
 case "$(uname -s)" in
   MSYS*|MINGW*)
-    PROFILE_SRC="$ROOT/msys/bash_profile.sh"
-    RC_SRC="$ROOT/msys/bashrc.sh"
+    PROFILE_SRC="$ROOT/msys/profile.sh"
+    RC_SRC="$ROOT/msys/rc.sh"
     ;;
   *)
-    PROFILE_SRC="$ROOT/bash_profile.sh"
-    RC_SRC="$ROOT/bashrc.sh"
+    PROFILE_SRC="$ROOT/profile.sh"
+    RC_SRC="$ROOT/rc.sh"
     ;;
 esac
 
