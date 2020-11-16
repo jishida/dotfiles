@@ -147,3 +147,9 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_keys='asdfghjkl;''qwertyuiopzxcvbnm,./'
 """
+
+[[plugins]]
+repo = "pprovost/vim-ps1"
+hook_add = """
+let g:ps1_nofold_blocks = 1
+"""
