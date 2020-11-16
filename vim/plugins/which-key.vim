@@ -119,7 +119,7 @@ call s:nmap('<Space>.e'       , '<Plug>(coc-diagnostic-next-error)' , 'jump-to-n
 call s:nmap('<Space>.E'       , '<Plug>(coc-diagnostic-prev-error)' , 'jump-to-previous-error'      )
 call s:nmap('<Space>.d'       , '<Plug>(coc-definition)'            , 'jump-to-definition'          )
 call s:nmap('<Space>.D'       , '<Plug>(coc-declaration)'           , 'jump-to-declaration'         )
-call s:nmap('<Space>.i'       , '<Plug>(coc-implementaion)'         , 'jump-to-implementaion'       )
+call s:nmap('<Space>.i'       , '<Plug>(coc-implementation)'        , 'jump-to-implementation'      )
 call s:nmap('<Space>.t'       , '<Plug>(coc-type-definition)'       , 'jump-to-type-declaration'    )
 call s:nmap('<Space>.r'       , '<Plug>(coc-reference)'             , 'jump-to-reference'           )
 call s:nmap('<Space>.F'       , '<Plug>(coc-format-selected)'       , 'format-selected-range'       )
