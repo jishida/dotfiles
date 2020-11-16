@@ -29,6 +29,7 @@ function! EnterDefaultDefx() abort
     call s:enter_default_defx()
   endif
   setlocal nowrap
+  setlocal nonumber
 endfunction
 
 function! EnterDefaultDefxCurrent() abort
