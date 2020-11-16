@@ -150,6 +150,7 @@ call s:nmap('<Space>.c.s'     , 'split<CR>:<C-u>CocConfig'          , 'open-hori
 call s:nmap('<Space>.c.v'     , 'vsplit<CR>:<C-u>CocConfig'         , 'open-vertical-split'         )
 
 let g:leader_map.a = { 'name': '+ale' }
+call s:nmap('a.a'             , 'ALEToggle'                         , 'toggle'                      )
 call s:nmap('a.i'             , 'ALEInfo'                           , 'info'                        )
 call s:nmap('a.o'             , '<Plug>(ale_hover)'                 , 'hover'                       )
 call s:nmap('a.p'             , '<Plug>(ale_documentation)'         , 'documentation'               )
