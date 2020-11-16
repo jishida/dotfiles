@@ -211,6 +211,13 @@ call s:nmap('b.b'  , 'Denite buffer'                                          , 
 call s:nmap('b.g'  , 'Denite -resume -buffer-name=denite-grep'                , 'grep'              )
 call s:nmap('b.f'  , 'Denite -resume -buffer-name=denite-file'                , 'file'              )
 
+let g:leader_map.c = { 'name': '+quickfix' }
+call s:nmap('c.c'  , 'cclose' , 'close'     )
+call s:nmap('c.o'  , 'copen'  , 'open'      )
+call s:nmap('c.l'  , 'clist'  , 'error list')
+call s:nmap('c.n'  , 'cn'     , 'next'      )
+call s:nmap('c.p'  , 'cp'     , 'previous'  )
+
 let g:leader_map.b.G = { 'name': '+gtags' }
 call s:nmap('b.G.d', 'Denite -resume -buffer-name=gtags_def'                  , 'definition'        )
 call s:nmap('b.G.r', 'Denite -resume -buffer-name=gtags_ref'                  , 'reference'         )
