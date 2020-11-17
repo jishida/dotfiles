@@ -9,6 +9,20 @@ call coc#config('list.normalMappings', {
       \   'p':      'action:preview',
       \ })
 
+call coc#config('powershell.integratedConsole.showOnStartup', 0)
+
+" js and ts format settings
+call coc#config('prettier', {
+      \   'semi': 1,
+      \   'trailingComma': 'none',
+      \   'jsxSingleQuote': 0,
+      \   'singleQuote': 0,
+      \   'tabWidth': 2,
+      \ })
+call coc#config('javascript.format.enabled', 0)
+call coc#config('typescript.format.enabled', 0)
+call coc#config('coc.preferences.formatOnSaveFiletypes', ['typescript', 'typescriptreact', 'javascript'])
+
 if executable('pyls')
   call coc#config('python.jediEnabled', 1)
   call coc#config('python.linting.flake8Enabled', executable('flake8') ? 1 : 0)
@@ -94,6 +108,8 @@ call coc#add_extension(
       \   'coc-json',
       \   'coc-python',
       \   'coc-tsserver',
+      \   'coc-prettier',
+      \   'coc-tslint',
       \   'coc-yaml',
       \   'coc-html',
       \   'coc-css',
