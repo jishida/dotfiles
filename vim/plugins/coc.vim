@@ -109,7 +109,7 @@ call coc#add_extension(
       \   'coc-python',
       \   'coc-tsserver',
       \   'coc-prettier',
-      \   'coc-tslint',
+      \   'coc-eslint',
       \   'coc-yaml',
       \   'coc-html',
       \   'coc-css',
