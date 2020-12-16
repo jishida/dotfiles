@@ -41,9 +41,9 @@ function! EnterDefaultDefxCurrent() abort
   endif
 endfunction
 
-function! TabNewWithTerminal() abort
+function! TabNewWithTerminal(shell) abort
   execute 'tabnew'
-  execute 'terminal'
+  execute 'terminal ' . a:shell
 endfunction
 
 function! TabNewWithDefx() abort
