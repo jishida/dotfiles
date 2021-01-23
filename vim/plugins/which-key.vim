@@ -277,6 +277,9 @@ call s:nmap('q.W'   , 'quit!'       , 'force-quit-window' )
 call s:nmap('q.t'   , 'tabclose'    , 'quit-tab'          )
 call s:nmap('q.T'   , 'tabclose!'   , 'force-quit-tab'    )
 
+let g:leader_map.p   = { 'name': '+path'    }
+call s:nmap('p.f', 'echo expand("%:p")', 'file path' )
+
 let g:localleader_map = {}
 call s:lnmap('s'          , '<Plug>(easymotion-s2)'         , 'easymotion-s2'             )
 call s:lnmap('<Space>'    , '<Plug>(easymotion-s2)'         , 'easymotion-s2'             )
