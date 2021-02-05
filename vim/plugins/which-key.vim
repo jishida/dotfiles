@@ -280,6 +280,17 @@ call s:nmap('q.T'   , 'tabclose!'   , 'force-quit-tab'    )
 let g:leader_map.p   = { 'name': '+path'    }
 call s:nmap('p.f', 'echo expand("%:p")', 'file path' )
 
+let g:leader_map.z   = { 'name': '+folding'    }
+for i in [0,1,2,3,4,5,6,7,8,9]
+  call s:nmap('z.'.i, 'set foldlevel='.i, 'level: '.i)
+endfor
+call s:nmap('z.m', 'set foldmethod=manual', 'method: manual' )
+call s:nmap('z.i', 'set foldmethod=indent', 'method: indent' )
+call s:nmap('z.e', 'set foldmethod=expr'  , 'method: expr'   )
+call s:nmap('z.s', 'set foldmethod=syntax', 'method: syntsx' )
+call s:nmap('z.d', 'set foldmethod=diff'  , 'method: diff'   )
+call s:nmap('z.M', 'set foldmethod=marker', 'method: marker' )
+
 let g:localleader_map = {}
 call s:lnmap('s'          , '<Plug>(easymotion-s2)'         , 'easymotion-s2'             )
 call s:lnmap('<Space>'    , '<Plug>(easymotion-s2)'         , 'easymotion-s2'             )
