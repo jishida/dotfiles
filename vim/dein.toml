@@ -149,6 +149,12 @@ let g:EasyMotion_keys='asdfghjkl;''qwertyuiopzxcvbnm,./'
 """
 
 [[plugins]]
+repo = "leafOfTree/vim-svelte-plugin"
+hook_add = """
+let g:vim_svelte_plugin_use_typescript = 1
+"""
+
+[[plugins]]
 repo = "pprovost/vim-ps1"
 hook_add = """
 let g:ps1_nofold_blocks = 1

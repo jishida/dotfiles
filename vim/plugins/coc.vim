@@ -21,7 +21,7 @@ call coc#config('prettier', {
       \ })
 call coc#config('javascript.format.enabled', 0)
 call coc#config('typescript.format.enabled', 0)
-call coc#config('coc.preferences.formatOnSaveFiletypes', ['typescript', 'typescriptreact', 'javascript'])
+call coc#config('coc.preferences.formatOnSaveFiletypes', ['typescript', 'typescriptreact', 'javascript', 'javascript.jsx', 'svelte'])
 
 if executable('pyls')
   call coc#config('python.jediEnabled', 1)
@@ -103,6 +103,7 @@ endif
 call coc#config('languageserver', s:lsmap)
 
 call coc#add_extension(
+      \   'coc-svelte',
       \   'coc-rls',
       \   'coc-java',
       \   'coc-json',
