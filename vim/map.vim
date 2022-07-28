@@ -30,10 +30,14 @@ for i in [1,2,3,4,5,6,7,8,9]
   execute 'nnoremap <A-'.i.'>' ':<C-u>'.i.'wincmd w<CR>'
 endfor
 
-nnoremap <A-j>        <C-w>j
-nnoremap <A-k>        <C-w>k
-nnoremap <A-h>        <C-w>h
-nnoremap <A-l>        <C-w>l
+nnoremap <A-j>        <C-w>-
+nnoremap <A-k>        <C-w>+
+nnoremap <A-h>        <C-w><
+nnoremap <A-l>        <C-w>>
+" nnoremap <A-j>        <C-w>j
+" nnoremap <A-k>        <C-w>k
+" nnoremap <A-h>        <C-w>h
+" nnoremap <A-l>        <C-w>l
 nnoremap <A-t>        <C-w>t
 nnoremap <A-b>        <C-w>b
 nnoremap <A-w>        <C-w>w
@@ -43,10 +47,14 @@ nnoremap <A-P>        <C-w>P
 nnoremap <A-s>        <C-w>s
 nnoremap <A-v>        <C-w>v
 
-nnoremap <A-Down>     <C-w>-
-nnoremap <A-up>       <C-w>+
-nnoremap <A-Left>     <C-w><
-nnoremap <A-Right>    <C-w>>
+nnoremap <A-Down>     <C-w>j
+nnoremap <A-Up>       <C-w>k
+nnoremap <A-Left>     <C-w>h
+nnoremap <A-Right>    <C-w>l
+" nnoremap <A-Down>     <C-w>-
+" nnoremap <A-up>       <C-w>+
+" nnoremap <A-Left>     <C-w><
+" nnoremap <A-Right>    <C-w>>
 
 nnoremap <C-A-j>      :<C-u>SwitchHeight -1<CR>
 nnoremap <C-A-k>      :<C-u>SwitchHeight 1<CR>

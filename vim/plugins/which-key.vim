@@ -280,9 +280,9 @@ call s:nmap('q.T'   , 'tabclose!'   , 'force-quit-tab'    )
 let g:leader_map.p   = { 'name': '+path'    }
 call s:nmap('p.f', 'echo expand("%:p")', 'file path' )
 
-let g:leader_map.z   = { 'name': '+folding'    }
+let g:leader_map.z   = { 'name': '+folding', '0-9': 'set level'    }
 for i in [0,1,2,3,4,5,6,7,8,9]
-  call s:nmap('z.'.i, 'set foldlevel='.i, 'level: '.i)
+  call s:nmap('z.'.i, 'set foldlevel='.i, '')
 endfor
 call s:nmap('z.m', 'set foldmethod=manual', 'method: manual' )
 call s:nmap('z.i', 'set foldmethod=indent', 'method: indent' )
